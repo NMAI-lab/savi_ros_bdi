@@ -43,6 +43,7 @@ public class Listener extends AbstractNodeMain {
 
         // See if I can get something in Jason to be part of the project.
         Literal exampleLiteral = Literal.parseLiteral("example(12)");
+        System.out.println("************************************");
         System.out.println(exampleLiteral.toString());
 
         final Log log = connectedNode.getLog();
