@@ -50,17 +50,16 @@ public class Listener extends AbstractNodeMain {
     @Override
     public void onStart(ConnectedNode connectedNode) {
 
-        // See if I can get something in Jason to be part of the project.
-        //Literal exampleLiteral = Literal.parseLiteral("example(12)");
-        //System.out.println("************************************");
-        //System.out.println(exampleLiteral.toString());
-
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
         subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
             @Override
             public void onNewMessage(std_msgs.String message) {
-                log.info("I heard: \"" + message.getData() + "\"");
+                // Interpret the message as a literal
+                Literal rxLiteral = Literal.parseLiteral(message.getData());
+
+                // Handle the message
+                log.info("I heard: \"" + rxLiteral.toString() + "\"");
             }
         });
     }
