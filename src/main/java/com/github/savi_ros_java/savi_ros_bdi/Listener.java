@@ -14,9 +14,9 @@
  * the License.
  */
 
-package com.github.rosjava.savi_ros_java.savi_ros_bdi;
+package com.github.savi_ros_java.savi_ros_bdi;
 
-//import com.github.savi_ros_java.savi_ros_bdi.SaviAgentArch;
+
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
@@ -29,9 +29,13 @@ import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 
-import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgentArch;
-import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgent;
-import com.github.rosjava.savi_ros_java.savi_ros_bdi.SyncAgentState;
+//import com.github.savi_ros_java.savi_ros_bdi.SaviAgentArch;
+//import com.github.savi_ros_java.savi_ros_bdi.SaviAgent;
+//import com.github.savi_ros_java.savi_ros_bdi.SyncAgentState;
+
+//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgentArch;
+//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgent;
+//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SyncAgentState;
 
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
