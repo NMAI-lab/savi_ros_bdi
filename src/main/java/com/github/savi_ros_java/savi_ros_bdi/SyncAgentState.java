@@ -137,7 +137,7 @@ public class SyncAgentState {
         msgIn.clear();
         return myCopy;
     }
-    */
+    *
 
 
     public synchronized void setMsgOut(String msgOut) {
@@ -157,18 +157,20 @@ public class SyncAgentState {
     /**
      * get next action
      * @return the next action in the queue (which is removed from the queue)
-     */
+     *
     public synchronized String getAction() {
         return this.actions.poll();
     }
 
     /**gets all the actions in the queue (assumption is that all will be processed in single simulation step)
      * in future they could have an associated timestamp
-     * */
+     *
+     *
     public synchronized List<String> getAllActions() {
         List<String> myCopy = new LinkedList<String>();
         myCopy.addAll(this.actions);
         this.actions.clear();
         return myCopy;
     }
+    */
 }
