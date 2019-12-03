@@ -29,13 +29,6 @@ import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 
-//import com.github.savi_ros_java.savi_ros_bdi.SaviAgentArch;
-//import com.github.savi_ros_java.savi_ros_bdi.SaviAgent;
-//import com.github.savi_ros_java.savi_ros_bdi.SyncAgentState;
-
-//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgentArch;
-//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgent;
-//import com.github.rosjava.savi_ros_java.savi_ros_bdi.SyncAgentState;
 
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
