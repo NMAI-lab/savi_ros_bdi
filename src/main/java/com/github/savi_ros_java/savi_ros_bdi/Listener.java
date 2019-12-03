@@ -16,6 +16,7 @@
 
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
+import com.github.savi_ros_java.savi_ros_bdi.SaviAgentArch;
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
@@ -28,10 +29,17 @@ import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 
+import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgentArch;
+import com.github.rosjava.savi_ros_java.savi_ros_bdi.SaviAgent;
+import com.github.rosjava.savi_ros_java.savi_ros_bdi.SyncAgentState;
+
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
  */
 public class Listener extends AbstractNodeMain {
+
+    private SyncAgentState agentState;
+    private SaviAgentArch agent;
 
     /**
      * Provide name of this node when requested.
@@ -49,6 +57,10 @@ public class Listener extends AbstractNodeMain {
      */
     @Override
     public void onStart(ConnectedNode connectedNode) {
+
+        // Initialize the agent
+        this.agent = new SaviAgentArch();
+        this.agentState = agent.getAgentState();
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
