@@ -6,14 +6,14 @@ import java.util.*;
 
 public class SyncAgentState {
     //private PerceptionSnapshot perceptions;		// Perceptions for the agent
-    private LinkedList<String> actions;			// Actions that the agent wants to execute
-    private Queue<String> msgOut;				// Messages that the agent is sending
-    private Queue<String> msgIn;				// Messages for the agent
+    //private LinkedList<String> actions;			// Actions that the agent wants to execute
+    //private Queue<String> msgOut;				// Messages that the agent is sending
+    //private Queue<String> msgIn;				// Messages for the agent
 
     private double reasoningCyclePeriod;		// How much time it should take to do a reasoning cycle - meaning that this much
     // time must elapse after a perception is received before a new perception can be received,
     // any actions can be allowed out of the reasoning cycle, and any mail sent
-    private double lastTimeStamp;				// Last time stamp for a perception or mail check - used for limiting the reasoning cycles
+    //private double lastTimeStamp;				// Last time stamp for a perception or mail check - used for limiting the reasoning cycles
 
     /**
      *  Constructor for the SyncAgentState class.
@@ -27,10 +27,10 @@ public class SyncAgentState {
      *  Constructor for the SyncAgentState class.
      */
     public SyncAgentState(double reasoningCyclePeriod) {
-        this.perceptions = null;
-        this.actions = new LinkedList<String>();
-        this.msgOut = new LinkedList<String>();
-        this.msgIn = new LinkedList<String>();
+    //    this.perceptions = null;
+    //    this.actions = new LinkedList<String>();
+    //    this.msgOut = new LinkedList<String>();
+    //    this.msgIn = new LinkedList<String>();
         this.reasoningCyclePeriod = reasoningCyclePeriod;
     }
 
