@@ -43,7 +43,7 @@ public class SaviAgent extends AgArch implements Runnable {
             System.err.println("Error setting up logger: " + e);
         }
 
-         Set parameters for the first perception ID
+        // Set parameters for the first perception ID
         this.lastPerceptionId = 0;
 
         this.firstPerception = true;
