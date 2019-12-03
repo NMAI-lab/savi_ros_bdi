@@ -6,8 +6,8 @@ import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 
-import savi.StateSynchronization.*;
-import savi.util.ResourceManager;
+//import savi.StateSynchronization.*;
+//import savi.util.ResourceManager;
 
 import java.io.*;
 import java.util.*;
