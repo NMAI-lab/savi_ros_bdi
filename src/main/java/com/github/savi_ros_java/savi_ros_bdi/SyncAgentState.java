@@ -60,7 +60,7 @@ public class SyncAgentState {
     /**
      * Update the perceptions.
      * @param newSnapsot
-     */
+     *
     public synchronized void setPerceptions(PerceptionSnapshot newSnapsot) {
         this.perceptions = new PerceptionSnapshot(newSnapsot);
         notify(); //notifies agent that new perceptions are available.
@@ -70,7 +70,7 @@ public class SyncAgentState {
     /**
      * Get the time stamp of the most recent perception in the snapshot
      * @return
-     */
+     *
     public synchronized double getLatestPerceptionTimeStamp() {
         if (this.perceptions == null) {
             return -1;
@@ -82,7 +82,7 @@ public class SyncAgentState {
     /**
      * Get the perceptions.
      * @return
-     */
+     *
     public synchronized PerceptionSnapshot getPerceptions() {
         if (this.perceptions == null) {
             return null;
@@ -96,7 +96,7 @@ public class SyncAgentState {
     /**
      * Get the perceptions. This version waits until fresh perceptions are available (defined as: their timestamp is different from ' last' ).
      * @return
-     */
+     *
     public synchronized PerceptionSnapshot getPerceptions(double last) {
         while(this.perceptions.getLatestTimeStamp()== last)
             try {
@@ -137,6 +137,7 @@ public class SyncAgentState {
         msgIn.clear();
         return myCopy;
     }
+    */
 
 
     public synchronized void setMsgOut(String msgOut) {
