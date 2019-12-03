@@ -1,5 +1,5 @@
 //package com.github.savi_ros_java.savi_ros_bdi;
-
+/*
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class SaviAgentArch {
      * but each agent can have its plans. The plans should be in a file type.asl where type is the agent attribute "type".
      *
      * @param agents
-     */
+     *
     public SaviAgentArch() {
         this.agentState = new SyncAgentState();
         this.theAgent = new SaviAgent("0", "demo", agentState);
@@ -36,7 +36,7 @@ public class SaviAgentArch {
 
     /**
      * Get the agent state object, used for passing data between the agent and ROS
-     */
+     *
     public SyncAgentState getAgentState() {
         // Deal with the null case (basically impossible)
         if (this.agentState == null) {
@@ -60,8 +60,9 @@ public class SaviAgentArch {
 
     /**
      * TODO: check what this actually does...
-     */
+     *
     void stopAgents() {
         theAgent.stop();
     }
 }
+*/

@@ -19,7 +19,7 @@ import java.util.logging.*;
  * Jason IDE stuff. (see Jason FAQ for more information about this example)
  * <p>
  * The class must extend AgArch class to be used by the Jason engine.
- */
+ *
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
@@ -101,7 +101,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
 				/* while(!this.agentState.reasoningComplete()) {	// Replace this with wait() / notify() technique
 					sleep();
-				}*/
+				}*
 
             }
             logger.fine("Agent " + getAgName() + " stopped.");
@@ -118,7 +118,7 @@ public class SaviAgent extends AgArch implements Runnable {
      * Check if there is fresh data to perceive. Don't want to read the same perception data more than once
      *
      * @return
-     */
+     *
     boolean checkForFreshPerception() {
         boolean freshData = false;        // Return flag - default is false (perception is not fresh)
         double currentPerceptId = agentState.getLatestPerceptionTimeStamp();
@@ -188,7 +188,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
     /**
      * This method gets the agent actions. This is called back by the agent code
-     */
+     *
     @Override
     public void act(ActionExec action) {
         // Get the action term
@@ -279,7 +279,7 @@ public class SaviAgent extends AgArch implements Runnable {
     /**
      * in case agent is sleeping
      * TODO: in case we get problems of agents not waking up on messages, this is what to use!!
-     */
+     *
     public void wakeAgent() {
         wakeUpSense();
     }
@@ -310,5 +310,6 @@ public class SaviAgent extends AgArch implements Runnable {
             }
         }
     }
-    */
+    *
 }
+*/
