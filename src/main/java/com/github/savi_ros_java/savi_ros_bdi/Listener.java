@@ -58,7 +58,7 @@ public class Listener extends AbstractNodeMain {
         // Initialize the agent
         //this.agent = new SaviAgentArch();
         //this.agentState = agent.getAgentState();
-        this.agentState = new SyncAgentState();
+        this.agentState = SyncAgentState.getSyncAgentState();
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
@@ -69,6 +69,9 @@ public class Listener extends AbstractNodeMain {
                 Literal rxLiteral = Literal.parseLiteral(message.getData());
 
                 // Handle the message
+                SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+                agentState.setPerceptions(rxLiteral.toString());
+
                 log.info("I heard: \"" + rxLiteral.toString() + "\"");
             }
         });

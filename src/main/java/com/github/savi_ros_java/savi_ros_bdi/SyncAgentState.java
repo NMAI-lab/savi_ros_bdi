@@ -5,6 +5,7 @@ package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 import java.util.*;
 
 public class SyncAgentState {
+    private String perception;
     //private PerceptionSnapshot perceptions;		// Perceptions for the agent
     //private LinkedList<String> actions;			// Actions that the agent wants to execute
     //private Queue<String> msgOut;				// Messages that the agent is sending
@@ -15,10 +16,29 @@ public class SyncAgentState {
     // any actions can be allowed out of the reasoning cycle, and any mail sent
     //private double lastTimeStamp;				// Last time stamp for a perception or mail check - used for limiting the reasoning cycles
 
+    private static SyncAgentState agentState = null;
+
+    public static SyncAgentState getSyncAgentState() {
+        if (this.agentState == null) {
+            return new SyncAgentState();
+        } else {
+            return SyncAgentState.agentState;
+        }
+    }
+
+
+    public static SyncAgentState getSyncAgentState(double reasoningCyclePeriod) {
+        if (this.agentState == null) {
+            return new SyncAgentState(reasoningCyclePeriod);
+        } else {
+            return SyncAgentState.agentState;
+        }
+    }
+
     /**
      *  Constructor for the SyncAgentState class.
      */
-    public SyncAgentState() {
+    private SyncAgentState() {
         this(0);		// Set a default value for reasoningCyclePeriod
     }
 
@@ -26,7 +46,7 @@ public class SyncAgentState {
     /**
      *  Constructor for the SyncAgentState class.
      */
-    public SyncAgentState(double reasoningCyclePeriod) {
+    private SyncAgentState(double reasoningCyclePeriod) {
     //    this.perceptions = null;
     //    this.actions = new LinkedList<String>();
     //    this.msgOut = new LinkedList<String>();
@@ -64,6 +84,10 @@ public class SyncAgentState {
     public synchronized void setPerceptions(PerceptionSnapshot newSnapsot) {
         this.perceptions = new PerceptionSnapshot(newSnapsot);
         notify(); //notifies agent that new perceptions are available.
+    }
+    */
+    public synchronized void setPerceptions(String newPerception) {
+        this.perception = String.valueOf(newPercepton);
     }
 
 
