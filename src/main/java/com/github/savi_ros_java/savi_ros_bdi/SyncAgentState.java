@@ -19,7 +19,7 @@ public class SyncAgentState {
     private static SyncAgentState agentState = null;
 
     public static SyncAgentState getSyncAgentState() {
-        if (this.agentState == null) {
+        if (SyncAgentState.agentState == null) {
             return new SyncAgentState();
         } else {
             return SyncAgentState.agentState;
@@ -28,7 +28,7 @@ public class SyncAgentState {
 
 
     public static SyncAgentState getSyncAgentState(double reasoningCyclePeriod) {
-        if (this.agentState == null) {
+        if (SyncAgentState.agentState == null) {
             return new SyncAgentState(reasoningCyclePeriod);
         } else {
             return SyncAgentState.agentState;
