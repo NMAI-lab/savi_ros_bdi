@@ -13,7 +13,7 @@ public class SaviAgentArch {
 
     private SyncAgentState agentState;
 
-    public JasonMAS() {
+    public void JasonMAS() {
         this(new HashMap<String, AgentModel>());
     }
 
