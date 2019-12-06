@@ -97,9 +97,9 @@ public class SaviAgent extends AgArch implements Runnable {
                 logger.fine("Agent " + getAgName() + " is reasoning....");
                 getTS().reasoningCycle();
 
-                if (getTS().canSleep()) {
-                    sleep();
-                }
+                //if (getTS().canSleep()) {
+                //    sleep();
+                //}
 
 				/* while(!this.agentState.reasoningComplete()) {	// Replace this with wait() / notify() technique
 					sleep();
