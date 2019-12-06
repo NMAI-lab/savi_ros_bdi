@@ -78,6 +78,7 @@ public class SyncAgentState {
     */
     public synchronized void setPerceptions(String newPerception) {
         this.perception = String.valueOf(newPerception);
+        System.out.println("Perception logged at SyncAgentState using setPerceptions()");
     }
 
 
@@ -99,8 +100,10 @@ public class SyncAgentState {
      */
     public synchronized String getPerceptions() {
         if (this.perception == null) {
+            System.out.println("NULL Perception read at SyncAgentState using getPerceptions()");
             return null;
         } else {
+            System.out.println("A REAL Perception read at SyncAgentState using getPerceptions()");
             return this.perception;
         }
     }
