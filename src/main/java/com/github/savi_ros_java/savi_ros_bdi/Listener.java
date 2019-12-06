@@ -57,6 +57,7 @@ public class Listener extends AbstractNodeMain {
 
         // Initialize the agent
         this.agent = new SaviAgentArch();
+        this.agent.startAgents();
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);

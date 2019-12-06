@@ -24,20 +24,16 @@ public class SaviAgentArch {
 
         this.theAgent = new SaviAgent("0", "demo");
 
-        Thread t1 = new Thread(theAgent);
-        am.setAgentThread(t1);
+        //Thread t1 = new Thread(theAgent);
+        //am.setAgentThread(t1);
     }
 
     /**
-     * TODO: check what this actually does...
+     * Start the agent.
      */
     public void startAgents() {
-        /*
-        for (String AgId : theAgentModels.keySet()) {
-            Thread t1 = theAgentModels.get(AgId).getAgentThread();
-            t1.start();
-        }
-        */
+        Thread t1 = new Thread(this.theAgent);
+        t1.start();
     }
 
     /**
