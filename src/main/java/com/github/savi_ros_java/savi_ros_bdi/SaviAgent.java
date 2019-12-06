@@ -59,7 +59,7 @@ public class SaviAgent extends AgArch implements Runnable {
             new TransitionSystem(ag, null, null, this);
             this.name = id;
             //InputStream aslFile = ResourceManager.getResourceStream("/asl/" + type + ".asl");
-            InputStreeam aslFile = ResourceManager.class.getResourceAsStream("~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/resources/main/asl/" + type + ".asl");
+            InputStream aslFile = new FileInputStream("~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/resources/main/asl/" + type + ".asl");
             ag.initAg();
             ag.load(aslFile, type);
         } catch (Exception e) {
