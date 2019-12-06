@@ -19,7 +19,7 @@ public class SyncAgentState {
 
 
     // Static instance of this singleton class
-    private static SyncAgentState agentState = null;
+    private static SyncAgentState agentState;
 
 
     /**
@@ -28,10 +28,10 @@ public class SyncAgentState {
      */
     public static SyncAgentState getSyncAgentState() {
         if (SyncAgentState.agentState == null) {
-            return new SyncAgentState();
-        } else {
-            return SyncAgentState.agentState;
+            SyncAgentState.agentState = new SyncAgentState();
+
         }
+        return SyncAgentState.agentState;
     }
 
 
