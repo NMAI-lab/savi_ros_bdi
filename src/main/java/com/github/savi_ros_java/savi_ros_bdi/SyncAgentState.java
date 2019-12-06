@@ -86,7 +86,8 @@ public class SyncAgentState {
     public synchronized void setPerceptions(String newPerception) {
         this.perception = String.valueOf(newPerception);
         this.perceptionAvailable = true;
-        //System.out.println("Perception logged at SyncAgentState using setPerceptions()");
+        System.out.println("Perception logged at SyncAgentState using setPerceptions()");
+        System.out.println(this.perception);
     }
 
 
