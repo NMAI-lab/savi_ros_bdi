@@ -56,9 +56,7 @@ public class Listener extends AbstractNodeMain {
     public void onStart(ConnectedNode connectedNode) {
 
         // Initialize the agent
-        //this.agent = new SaviAgentArch();
-        //this.agentState = agent.getAgentState();
-        this.agentState = SyncAgentState.getSyncAgentState();
+        this.agent = new SaviAgentArch();
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);

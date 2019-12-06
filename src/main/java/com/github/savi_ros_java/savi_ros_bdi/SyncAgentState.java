@@ -11,13 +11,20 @@ public class SyncAgentState {
     //private Queue<String> msgOut;				// Messages that the agent is sending
     //private Queue<String> msgIn;				// Messages for the agent
 
-    private double reasoningCyclePeriod;		// How much time it should take to do a reasoning cycle - meaning that this much
+    //private double reasoningCyclePeriod;		// How much time it should take to do a reasoning cycle - meaning that this much
     // time must elapse after a perception is received before a new perception can be received,
     // any actions can be allowed out of the reasoning cycle, and any mail sent
     //private double lastTimeStamp;				// Last time stamp for a perception or mail check - used for limiting the reasoning cycles
 
+
+    // Static instance of this singleton class
     private static SyncAgentState agentState = null;
 
+
+    /**
+     * Mehthod for accessing this singleton class
+     * @return      Reference to the singleton object
+     */
     public static SyncAgentState getSyncAgentState() {
         if (SyncAgentState.agentState == null) {
             return new SyncAgentState();
@@ -27,31 +34,14 @@ public class SyncAgentState {
     }
 
 
-    public static SyncAgentState getSyncAgentState(double reasoningCyclePeriod) {
-        if (SyncAgentState.agentState == null) {
-            return new SyncAgentState(reasoningCyclePeriod);
-        } else {
-            return SyncAgentState.agentState;
-        }
-    }
-
     /**
      *  Constructor for the SyncAgentState class.
      */
     private SyncAgentState() {
-        this(0);		// Set a default value for reasoningCyclePeriod
-    }
-
-
-    /**
-     *  Constructor for the SyncAgentState class.
-     */
-    private SyncAgentState(double reasoningCyclePeriod) {
     //    this.perceptions = null;
     //    this.actions = new LinkedList<String>();
     //    this.msgOut = new LinkedList<String>();
     //    this.msgIn = new LinkedList<String>();
-        this.reasoningCyclePeriod = reasoningCyclePeriod;
     }
 
 
