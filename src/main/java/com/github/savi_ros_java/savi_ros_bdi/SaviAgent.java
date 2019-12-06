@@ -99,21 +99,21 @@ public class SaviAgent extends AgArch implements Runnable {
         try {
             //running = true;
 
-            //while (isRunning()) {
+            while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
                 //logger.fine("Agent " + getAgName() + " is reasoning....");
                 System.out.println("Agent is reasoning....");
                 getTS().reasoningCycle();
 
-                //if (getTS().canSleep()) {
-                //    sleep();
-                //}
+                if (getTS().canSleep()) {
+                    sleep();
+                }
 
 				/* while(!this.agentState.reasoningComplete()) {	// Replace this with wait() / notify() technique
 					sleep();
 				}*/
 
-            //}
+            }
             //logger.fine("Agent " + getAgName() + " stopped.");
             System.out.println("Agent stopped.");
         } catch (Exception e) {
