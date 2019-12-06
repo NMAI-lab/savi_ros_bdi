@@ -96,6 +96,18 @@ public class SyncAgentState {
     /**
      * Get the perceptions.
      * @return
+     */
+    public synchronized String getPerceptions() {
+        if (this.perception == null) {
+            return null;
+        } else {
+            return new String.ValueOf(this.perception);
+        }
+    }
+
+    /**
+     * Get the perceptions.
+     * @return
      *
     public synchronized PerceptionSnapshot getPerceptions() {
         if (this.perceptions == null) {
@@ -162,10 +174,13 @@ public class SyncAgentState {
     public synchronized void setMsgIn(String msgIn) {
         this.msgIn.add(msgIn);
     }
+    */
 
     public synchronized void addAction(String action) {
         //while(!this.reasoningComplete());							// Replace this with wait() / notify() technique
-        this.actions.add(action);
+        //this.actions.add(action);
+        System.out.println("Action to execute: ");
+        System.out.println(action);
     }
 
     /**

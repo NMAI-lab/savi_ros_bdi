@@ -19,7 +19,7 @@ import java.util.logging.*;
  * Jason IDE stuff. (see Jason FAQ for more information about this example)
  * <p>
  * The class must extend AgArch class to be used by the Jason engine.
- *
+ */
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
@@ -30,14 +30,14 @@ public class SaviAgent extends AgArch implements Runnable {
 
     private double lastPerceptionId;        // ID of the last perception received
     private boolean firstPerception;    // Flag for noting if any perceptions have ever been received (deal with the first ID issue)
-    private PerceptionHistory perceptHistory;
+    //private PerceptionHistory perceptHistory;
     private File perceptionLogFile;
 
     // TimeStamp file names
     private long lastCycleTimeStamp;
     private File timeStampFile;
 
-    public SaviAgent(String id, String type, SyncAgentState modelAgentState) { //need to make the UAS class public so that the AgArch can refer back to it
+    public SaviAgent(String id, String type) {
         try {
             InputStream logConfig = ResourceManager.getResourceStream("logging.properties");
             LogManager.getLogManager().readConfiguration(logConfig);
@@ -46,11 +46,11 @@ public class SaviAgent extends AgArch implements Runnable {
         }
 
         // Set parameters for the first perception ID
-        this.lastPerceptionId = 0;
+        //this.lastPerceptionId = 0;
 
-        this.firstPerception = true;
-        this.perceptHistory = new PerceptionHistory();
-        agentState = modelAgentState;
+        //this.firstPerception = true;
+        //this.perceptHistory = new PerceptionHistory();
+        agentState = SyncAgentState.getSyncAgentState();
         running = false;
 
         // set up the Jason agent
@@ -65,6 +65,7 @@ public class SaviAgent extends AgArch implements Runnable {
             logger.log(Level.SEVERE, "Init error", e);
         }
 
+        /*
         // Set up the perception logfile
         try {
             this.perceptionLogFile = ResourceManager.createOutputFile("PerceptionLog_" + this.name + ".log");
@@ -81,6 +82,7 @@ public class SaviAgent extends AgArch implements Runnable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        */
 
     }
 
@@ -101,7 +103,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
 				/* while(!this.agentState.reasoningComplete()) {	// Replace this with wait() / notify() technique
 					sleep();
-				}*
+				}*/
 
             }
             logger.fine("Agent " + getAgName() + " stopped.");
@@ -135,6 +137,7 @@ public class SaviAgent extends AgArch implements Runnable {
         // Return the result
         return freshData;
     }
+    */
 
     // this method just add some perception for the agent
     @Override
@@ -144,16 +147,20 @@ public class SaviAgent extends AgArch implements Runnable {
         //agentState.buildSnapshot();
 
         // Get the perceptions from agentState
-        PerceptionSnapshot currentPerceptions = new PerceptionSnapshot(this.agentState.getPerceptions(this.lastPerceptionId));
-        this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
+        //PerceptionSnapshot currentPerceptions = new PerceptionSnapshot(this.agentState.getPerceptions(this.lastPerceptionId));
+        //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
+        Literal perceptionLiteral = Literal.parseLiteral(this.agentState.getPerceptions());
 
         // Update the history, get the list of literals to send to the agent
-        List<Literal> perceptionLiterals = new ArrayList<Literal>(this.perceptHistory.updatePerceptions(currentPerceptions));
+        //List<Literal> perceptionLiterals = new ArrayList<Literal>(this.perceptHistory.updatePerceptions(currentPerceptions));
+        List<Literal> perceptionLiterals = new ArrayList<Literal>();
+        perceptionLiterals.add(perceptionLiteral);
 
-        logger.log(Level.FINE, "Agent " + getAgName() + " Perceiving perception " + this.lastPerceptionId);
-        logger.log(Level.FINE, perceptionLiterals.toString());
+        logger.log(Level.FINE, "Agent " + getAgName() + " Perceiving perception ");// + this.lastPerceptionId);
+        logger.log(Level.FINE, perceptionLiteral.toString());
 
         // Write the perceptions to the perception logfile
+        /*
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.perceptionLogFile, true));
             for (Literal current : perceptionLiterals) {
@@ -165,8 +172,9 @@ public class SaviAgent extends AgArch implements Runnable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        */
 
-
+        /*
         long currentSystemTime = System.currentTimeMillis();
         long simulationCycleTime = currentSystemTime - this.lastCycleTimeStamp;
         this.lastCycleTimeStamp = currentSystemTime;
@@ -182,13 +190,13 @@ public class SaviAgent extends AgArch implements Runnable {
             e.printStackTrace();
         }
 
-
+        */
         return perceptionLiterals;
     }
 
     /**
      * This method gets the agent actions. This is called back by the agent code
-     *
+     */
     @Override
     public void act(ActionExec action) {
         // Get the action term
@@ -310,6 +318,5 @@ public class SaviAgent extends AgArch implements Runnable {
             }
         }
     }
-    *
+    */
 }
-*/
