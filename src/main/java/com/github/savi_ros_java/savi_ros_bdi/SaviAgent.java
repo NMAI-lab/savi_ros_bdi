@@ -160,6 +160,7 @@ public class SaviAgent extends AgArch implements Runnable {
         //PerceptionSnapshot currentPerceptions = new PerceptionSnapshot(this.agentState.getPerceptions(this.lastPerceptionId));
         //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
 
+        System.out.println("I'm in the perceive method");
         while(this.agentState.isPerceptionAvailable() == false) {
             sleep();       // Wait until there is a perception
         }
