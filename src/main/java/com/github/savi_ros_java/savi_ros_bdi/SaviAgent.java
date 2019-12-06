@@ -25,7 +25,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
     private String name;
     private SyncAgentState agentState;
-    //private boolean running;
+    private boolean running;
     //private static Logger logger = Logger.getLogger(SaviAgent.class.getName());
 
     //private double lastPerceptionId;        // ID of the last perception received
@@ -97,7 +97,7 @@ public class SaviAgent extends AgArch implements Runnable {
         System.out.println("I'm a Jason Agent and I'm starting");
 
         try {
-            //running = true;
+            running = true;
 
             while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
@@ -161,11 +161,11 @@ public class SaviAgent extends AgArch implements Runnable {
         //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
 
         System.out.println("I'm in the perceive method");
-        while(this.agentState.isPerceptionAvailable() == false) {
-            sleep();       // Wait until there is a perception
-        }
+        //while(this.agentState.isPerceptionAvailable() == false) {
+        //    sleep();       // Wait until there is a perception
+        //}
 
-        System.out.println("I made it past the delay loop.");
+        //System.out.println("I made it past the delay loop.");
 
         Literal perceptionLiteral = Literal.parseLiteral(this.agentState.getPerceptions());
 
@@ -264,10 +264,10 @@ public class SaviAgent extends AgArch implements Runnable {
         actionExecuted(action);
     }
 
-    /*
+
     @Override
     public boolean canSleep() {
-        return !this.checkForFreshPerception();
+        return !agentState.isPerceptionAvailable();
     }
 
     @Override
@@ -279,7 +279,7 @@ public class SaviAgent extends AgArch implements Runnable {
     public void stop() {
         running = false;
     }
-    */
+
     // a very simple implementation of sleep
     public void sleep() {
         //logger.log(Level.FINE, "Snoozing");
