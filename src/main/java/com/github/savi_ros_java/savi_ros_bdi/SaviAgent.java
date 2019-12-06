@@ -161,9 +161,9 @@ public class SaviAgent extends AgArch implements Runnable {
         //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
 
         System.out.println("I'm in the perceive method");
-        while(this.agentState.isPerceptionAvailable() == false) {
-            sleep();       // Wait until there is a perception
-        }
+        //while(this.agentState.isPerceptionAvailable() == false) {
+        //    sleep();       // Wait until there is a perception
+        //}
 
         System.out.println("I made it past the delay loop.");
 

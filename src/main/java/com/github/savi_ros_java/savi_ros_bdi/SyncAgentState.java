@@ -39,7 +39,7 @@ public class SyncAgentState {
      *  Constructor for the SyncAgentState class.
      */
     private SyncAgentState() {
-        this.perception = null;
+        this.perception = new String("time(5)");
         this.perceptionAvailable = false;
     //    this.perceptions = null;
     //    this.actions = new LinkedList<String>();
