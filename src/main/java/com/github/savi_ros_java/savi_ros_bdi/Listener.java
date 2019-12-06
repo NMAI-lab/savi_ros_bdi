@@ -36,7 +36,7 @@ import jason.asSyntax.*;
 public class Listener extends AbstractNodeMain {
 
     private SyncAgentState agentState;
-    //private SaviAgentArch agent;
+    private SaviAgentArch agent;
 
     /**
      * Provide name of this node when requested.
