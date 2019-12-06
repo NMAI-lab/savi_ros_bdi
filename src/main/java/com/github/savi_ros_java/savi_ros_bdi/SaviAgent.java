@@ -160,7 +160,7 @@ public class SaviAgent extends AgArch implements Runnable {
         //PerceptionSnapshot currentPerceptions = new PerceptionSnapshot(this.agentState.getPerceptions(this.lastPerceptionId));
         //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
         while(this.agentState.getPerceptions() == null) {
-            Thread.sleep(1000);       // Wait until there is a perception
+            sleep();       // Wait until there is a perception
         }
 
         Literal perceptionLiteral = Literal.parseLiteral(this.agentState.getPerceptions());
@@ -275,16 +275,17 @@ public class SaviAgent extends AgArch implements Runnable {
     public void stop() {
         running = false;
     }
-
+    */
     // a very simple implementation of sleep
     public void sleep() {
-        logger.log(Level.FINE, "Snoozing");
+        //logger.log(Level.FINE, "Snoozing");
+        System.out.println("Snoozing");
         try {
             Thread.sleep(100);                    // TODO: Need to revisit this
         } catch (InterruptedException e) {
         }
     }
-    */
+
 
     /**
      * Send message to another agent (via simulated wifi).
