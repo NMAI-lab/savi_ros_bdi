@@ -5,4 +5,4 @@
  */
 
 
-+time(T) <-  turn(right).
++time(_) <-  turn(right).
