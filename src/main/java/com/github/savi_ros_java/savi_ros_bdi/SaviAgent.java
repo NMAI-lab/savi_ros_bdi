@@ -167,7 +167,10 @@ public class SaviAgent extends AgArch implements Runnable {
 
         System.out.println("I made it past the delay loop.");
 
-        Literal perceptionLiteral = Literal.parseLiteral(this.agentState.getPerceptions());
+        String receivedPerception = this.agentState.getPerceptions();
+        System.out.println("Agent received perception: ");
+        System.out.println(receivedPerception);
+        Literal perceptionLiteral = Literal.parseLiteral(receivedPerception);
 
         // Update the history, get the list of literals to send to the agent
         //List<Literal> perceptionLiterals = new ArrayList<Literal>(this.perceptHistory.updatePerceptions(currentPerceptions));
