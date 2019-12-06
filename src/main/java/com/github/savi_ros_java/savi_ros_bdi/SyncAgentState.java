@@ -108,12 +108,8 @@ public class SyncAgentState {
      * @return
      */
     public synchronized String getPerceptions() {
-        //if (this.perceptionAvailable) {
-            this.perceptionAvailable = false;
-            return this.perception;
-        //} else {
-        //    return null;
-        //}
+        this.perceptionAvailable = false;
+        return this.perception;
     }
 
     /**
