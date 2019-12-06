@@ -26,7 +26,7 @@ public class SaviAgent extends AgArch implements Runnable {
     private String name;
     private SyncAgentState agentState;
     private boolean running;
-    private static Logger logger = Logger.getLogger(SimpleJasonAgent.class.getName());
+    private static Logger logger = Logger.getLogger(SaviAgent.class.getName());
 
     private double lastPerceptionId;        // ID of the last perception received
     private boolean firstPerception;    // Flag for noting if any perceptions have ever been received (deal with the first ID issue)
