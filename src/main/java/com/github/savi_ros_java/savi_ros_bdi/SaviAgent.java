@@ -279,7 +279,7 @@ public class SaviAgent extends AgArch implements Runnable {
     // a very simple implementation of sleep
     public void sleep() {
         //logger.log(Level.FINE, "Snoozing");
-        System.out.println("Snoozing");
+        //System.out.println("Snoozing");
         try {
             Thread.sleep(100);                    // TODO: Need to revisit this
         } catch (InterruptedException e) {
