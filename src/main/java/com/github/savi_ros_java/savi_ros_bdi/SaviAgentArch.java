@@ -24,8 +24,8 @@ public class SaviAgentArch {
 
         this.theAgent = new SaviAgent("0", "demo");
 
-        //Thread t1 = new Thread(theAgent);
-        //am.setAgentThread(t1);
+        Thread t1 = new Thread(theAgent);
+        am.setAgentThread(t1);
     }
 
     /**
