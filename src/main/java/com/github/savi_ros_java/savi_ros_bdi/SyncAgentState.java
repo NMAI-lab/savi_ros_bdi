@@ -101,7 +101,7 @@ public class SyncAgentState {
         if (this.perception == null) {
             return null;
         } else {
-            return String.ValueOf(this.perception);
+            return this.perception;
         }
     }
 
