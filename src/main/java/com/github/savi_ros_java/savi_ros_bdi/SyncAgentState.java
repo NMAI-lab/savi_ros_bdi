@@ -87,7 +87,7 @@ public class SyncAgentState {
     }
     */
     public synchronized void setPerceptions(String newPerception) {
-        this.perception = String.valueOf(newPercepton);
+        this.perception = String.valueOf(newPerception);
     }
 
 
