@@ -24,8 +24,6 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 
-import jason.architecture.AgArch;
-import jason.asSemantics.*;
 import jason.asSyntax.*;
 
 /**
@@ -33,25 +31,43 @@ import jason.asSyntax.*;
  */
 public class Listener extends AbstractNodeMain {
 
+    private SyncAgentState agentState;
+    private SaviAgentArch agent;
+
+    /**
+     * Provide name of this node when requested.
+     * @return
+     */
     @Override
     public GraphName getDefaultNodeName() {
         return GraphName.of("rosjava/listener");
     }
 
+
+    /**
+     * Start method for the node (can think of this as the 'main()' method.
+     * @param connectedNode
+     */
     @Override
     public void onStart(ConnectedNode connectedNode) {
 
-        // See if I can get something in Jason to be part of the project.
-        Literal exampleLiteral = Literal.parseLiteral("example(12)");
-        System.out.println("************************************");
-        System.out.println(exampleLiteral.toString());
+        // Initialize the agent
+        this.agent = new SaviAgentArch();
+        this.agent.startAgents();
 
         final Log log = connectedNode.getLog();
-        Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("chatter", std_msgs.String._TYPE);
+        Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
         subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
             @Override
             public void onNewMessage(std_msgs.String message) {
-                log.info("I heard: \"" + message.getData() + "\"");
+                // Interpret the message as a literal
+                Literal rxLiteral = Literal.parseLiteral(message.getData());
+
+                // Handle the message
+                SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+                agentState.setPerceptions(rxLiteral.toString());
+
+                //log.info("I heard: \"" + rxLiteral.toString() + "\"");
             }
         });
     }
