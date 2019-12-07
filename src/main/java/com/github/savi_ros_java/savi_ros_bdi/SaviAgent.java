@@ -38,6 +38,9 @@ public class SaviAgent extends AgArch implements Runnable {
         }
     }
 
+    /**
+     * Execute the BDI reaoning cycle.
+     */
     public void run() {
         System.out.println("I'm a Jason Agent and I'm starting");
 
@@ -59,12 +62,19 @@ public class SaviAgent extends AgArch implements Runnable {
         }
     }
 
+    /**
+     * Get the agent's name
+     * @return
+     */
     public String getAgName() {
         return name;
     }
 
 
-    // this method just add some perception for the agent
+    /**
+     * Get the perceptions for the agent. This is automatically called by the agent's reasoning cycle.
+     * @return
+     */
     @Override
     public List<Literal> perceive() {
 
@@ -91,7 +101,7 @@ public class SaviAgent extends AgArch implements Runnable {
     }
 
     /**
-     * This method gets the agent actions. This is called back by the agent code
+     * This method gets the agent actions. This is automatically called by the agent's reasoning cycle.
      */
     @Override
     public void act(ActionExec action) {
@@ -135,23 +145,35 @@ public class SaviAgent extends AgArch implements Runnable {
         actionExecuted(action);
     }
 
-
+    /**
+     * Determine if the agent can sleep
+     * @return
+     */
     @Override
     public boolean canSleep() {
         return !agentState.isPerceptionAvailable();
     }
 
+    /**
+     * Determine if the agent is running
+     * @return
+     */
     @Override
     public boolean isRunning() {
         return running;
     }
 
+    /**
+     * Stop the agent
+     */
     @Override
     public void stop() {
         running = false;
     }
 
-    // a very simple implementation of sleep
+    /**
+     * A very simple implementation of sleep
+     */
     public void sleep() {
         //logger.log(Level.FINE, "Snoozing");
         //System.out.println("Snoozing");
