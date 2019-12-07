@@ -2,6 +2,11 @@ package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
 /**
  * Singleton class for passing perceptions, actions, messages between the agent and the environment.
+ *
+ * Based upon a class found in SAVI: https://github.com/NMAI-lab/SAVI
+ *
+ * @author Patrick Gavigan
+ * @date 6 December 2019
  */
 public class SyncAgentState {
     private String perception;

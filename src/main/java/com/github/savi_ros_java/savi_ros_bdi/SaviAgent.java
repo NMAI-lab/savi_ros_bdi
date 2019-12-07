@@ -8,10 +8,13 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Example of an agent that only uses Jason BDI engine. It runs without all
- * Jason IDE stuff. (see Jason FAQ for more information about this example)
+ * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
+ * It runs without all the Jason IDE stuff. (see Jason FAQ)
  *
- * The class must extend AgArch class to be used by the Jason engine.
+ * Based upon a class found in SAVI: https://github.com/NMAI-lab/SAVI
+ *
+ * @author Patrick Gavigan
+ * @date 6 December 2019
  */
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
