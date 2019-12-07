@@ -16,7 +16,6 @@
 
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
-
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
@@ -25,10 +24,7 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 
-import jason.architecture.AgArch;
-import jason.asSemantics.*;
 import jason.asSyntax.*;
-
 
 /**
  * A simple {@link Subscriber} {@link NodeMain}.

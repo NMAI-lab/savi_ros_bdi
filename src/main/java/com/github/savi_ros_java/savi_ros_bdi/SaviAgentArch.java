@@ -2,13 +2,8 @@
 
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class SaviAgentArch {
 
-    //private Map<String, AgentModel> theAgentModels;
     private SaviAgent theAgent;
 
 
@@ -21,11 +16,7 @@ public class SaviAgentArch {
      * @param agents
      */
     public SaviAgentArch() {
-
         this.theAgent = new SaviAgent("0", "demo");
-
-        //Thread t1 = new Thread(theAgent);
-        //am.setAgentThread(t1);
     }
 
     /**

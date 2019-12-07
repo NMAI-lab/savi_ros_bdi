@@ -1,8 +1,6 @@
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public class ResourceManager {
 

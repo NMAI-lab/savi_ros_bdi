@@ -1,23 +1,16 @@
-//package com.github.savi_ros_java.savi_ros_bdi;
-
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
 import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 
-//import savi.StateSynchronization.*;
-//import savi.util.ResourceManager;
-
 import java.io.*;
 import java.util.*;
-import java.util.logging.*;
-
 
 /**
  * Example of an agent that only uses Jason BDI engine. It runs without all
  * Jason IDE stuff. (see Jason FAQ for more information about this example)
- * <p>
+ *
  * The class must extend AgArch class to be used by the Jason engine.
  */
 public class SaviAgent extends AgArch implements Runnable {
@@ -26,74 +19,26 @@ public class SaviAgent extends AgArch implements Runnable {
     private String name;
     private SyncAgentState agentState;
     private boolean running;
-    //private static Logger logger = Logger.getLogger(SaviAgent.class.getName());
-
-    //private double lastPerceptionId;        // ID of the last perception received
-    //private boolean firstPerception;    // Flag for noting if any perceptions have ever been received (deal with the first ID issue)
-    //private PerceptionHistory perceptHistory;
-    //private File perceptionLogFile;
-
-    // TimeStamp file names
-    //private long lastCycleTimeStamp;
-    //private File timeStampFile;
 
     public SaviAgent(String id, String type) {
-        /*
-        try {
-            InputStream logConfig = ResourceManager.getResourceStream("logging.properties");
-            LogManager.getLogManager().readConfiguration(logConfig);
-        } catch (Exception e) {
-            System.err.println("Error setting up logger: " + e);
-        }*/
 
-        // Set parameters for the first perception ID
-        //this.lastPerceptionId = 0;
-
-        //this.firstPerception = true;
-        //this.perceptHistory = new PerceptionHistory();
         agentState = SyncAgentState.getSyncAgentState();
-        //running = false;
 
         // set up the Jason agent
         try {
             Agent ag = new Agent();
             new TransitionSystem(ag, null, null, this);
             this.name = id;
-            //InputStream aslFile = ResourceManager.getResourceStream("/asl/" + type + ".asl");
-            //System.out.println(new File(".").getAbsolutePath());
-            //SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin/
+
             InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
-            //InputStream aslFile = new FileInputStream("/home/pi/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/resources/main/asl/" + type + ".asl");
             ag.initAg();
             ag.load(aslFile, type);
         } catch (Exception e) {
             System.out.println("Init error " + e.toString());
-            //logger.log(Level.SEVERE, "Init error", e);
         }
-
-        /*
-        // Set up the perception logfile
-        try {
-            this.perceptionLogFile = ResourceManager.createOutputFile("PerceptionLog_" + this.name + ".log");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        // Set up the cycle length logfile
-        this.lastCycleTimeStamp = 0;
-        try {
-            this.timeStampFile = ResourceManager.createOutputFile("AgentTimeStamps_" + this.name + ".log");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        */
-
     }
 
     public void run() {
-        //logger.log(Level.FINE, "I'm a Jason Agent and I'm starting");
         System.out.println("I'm a Jason Agent and I'm starting");
 
         try {
@@ -101,23 +46,15 @@ public class SaviAgent extends AgArch implements Runnable {
 
             while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
-                //logger.fine("Agent " + getAgName() + " is reasoning....");
                 System.out.println("Agent is reasoning....");
                 getTS().reasoningCycle();
 
                 if (getTS().canSleep()) {
                     sleep();
                 }
-
-				/* while(!this.agentState.reasoningComplete()) {	// Replace this with wait() / notify() technique
-					sleep();
-				}*/
-
             }
-            //logger.fine("Agent " + getAgName() + " stopped.");
             System.out.println("Agent stopped.");
         } catch (Exception e) {
-            //logger.log(Level.SEVERE, "Run error", e);
             System.out.println("Run error " + e.toString());
         }
     }
@@ -126,39 +63,10 @@ public class SaviAgent extends AgArch implements Runnable {
         return name;
     }
 
-    /**
-     * Check if there is fresh data to perceive. Don't want to read the same perception data more than once
-     *
-     * @return
-     *
-    boolean checkForFreshPerception() {
-        boolean freshData = false;        // Return flag - default is false (perception is not fresh)
-        double currentPerceptId = agentState.getLatestPerceptionTimeStamp();
-
-        // Is this the first time perceiving? Is the perception ID different from the last perception?
-        if ((this.firstPerception) || (currentPerceptId != this.lastPerceptionId)) {
-            this.firstPerception = false;    // No longer the first perception
-            freshData = true;                // There is fresh data
-            this.lastPerceptionId = currentPerceptId;    // Update the perception ID
-            logger.fine("Agent " + getAgName() + " has fresh perception at " + this.lastPerceptionId);
-        } else
-            logger.fine("Agent " + getAgName() + " has STALE perception at " + this.lastPerceptionId);
-
-        // Return the result
-        return freshData;
-    }
-    */
 
     // this method just add some perception for the agent
     @Override
     public List<Literal> perceive() {
-
-        // This line will need to go away once the SIM side handles this.
-        //agentState.buildSnapshot();
-
-        // Get the perceptions from agentState
-        //PerceptionSnapshot currentPerceptions = new PerceptionSnapshot(this.agentState.getPerceptions(this.lastPerceptionId));
-        //this.lastPerceptionId = currentPerceptions.getLatestTimeStamp();
 
         System.out.println("I'm in the perceive method");
         while(this.agentState.isPerceptionAvailable() == false) {
@@ -173,47 +81,12 @@ public class SaviAgent extends AgArch implements Runnable {
         Literal perceptionLiteral = Literal.parseLiteral(receivedPerception);
 
         // Update the history, get the list of literals to send to the agent
-        //List<Literal> perceptionLiterals = new ArrayList<Literal>(this.perceptHistory.updatePerceptions(currentPerceptions));
         List<Literal> perceptionLiterals = new ArrayList<Literal>();
         perceptionLiterals.add(perceptionLiteral);
 
-        //logger.log(Level.FINE, "Agent " + getAgName() + " Perceiving perception ");// + this.lastPerceptionId);
-        //logger.log(Level.FINE, perceptionLiteral.toString());
-        System.out.println("Agent Perceiving perception ");// + this.lastPerceptionId);
+        System.out.println("Agent Perceiving perception ");
         System.out.println(perceptionLiteral.toString());
 
-        // Write the perceptions to the perception logfile
-        /*
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.perceptionLogFile, true));
-            for (Literal current : perceptionLiterals) {
-                writer.append(current.toString() + " ");
-            }
-            writer.newLine();
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        */
-
-        /*
-        long currentSystemTime = System.currentTimeMillis();
-        long simulationCycleTime = currentSystemTime - this.lastCycleTimeStamp;
-        this.lastCycleTimeStamp = currentSystemTime;
-
-        // Write the timestamp to the timestamp logfile
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.timeStampFile, true));
-            writer.append((new Long(simulationCycleTime)).toString());
-            writer.newLine();
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        */
         return perceptionLiterals;
     }
 
@@ -224,10 +97,6 @@ public class SaviAgent extends AgArch implements Runnable {
     public void act(ActionExec action) {
         // Get the action term
         Structure actionTerm = action.getActionTerm();
-
-        // Log the action
-        //getTS().getLogger().info("Agent " + getAgName() + " is doing: " + actionTerm);
-        //logger.log(Level.FINE, "MYAgent " + getAgName() + " is doing: " + actionTerm);
 
         // Define the action string
         String actionString = "";
@@ -261,7 +130,6 @@ public class SaviAgent extends AgArch implements Runnable {
         // Add the action to agentState
         agentState.addAction(actionString);
 
-
         // Set that the execution was OK and flag it as complete.
         action.setResult(true);
         actionExecuted(action);
@@ -292,55 +160,4 @@ public class SaviAgent extends AgArch implements Runnable {
         } catch (InterruptedException e) {
         }
     }
-
-
-    /**
-     * Send message to another agent (via simulated wifi).
-     */
-    /*
-    @Override
-    public void sendMsg(Message m) throws Exception {
-        // Make sure sender parameter is set
-        if (m.getSender() == null) m.setSender(getAgName());
-
-        // Put the message in the wifi queue
-        this.agentState.setMsgOut(m.toString());
-    }
-    */
-
-    /**
-     * in case agent is sleeping
-     * TODO: in case we get problems of agents not waking up on messages, this is what to use!!
-     *
-    public void wakeAgent() {
-        wakeUpSense();
-    }
-
-    /*
-    @Override
-    public void broadcast(Message m) throws Exception {
-        m.setReceiver(broadcastID);
-        this.sendMsg(m);
-    }
-    */
-
-    /*
-    @Override
-    public void checkMail() {
-        Circumstance circ = getTS().getC();
-        Queue<String> messages = new LinkedList<String>();
-        messages = this.agentState.getMsgIn();
-        if (messages.isEmpty())
-            return;
-        for (String messageString : messages) {
-            try {
-                Message currentMessage = Message.parseMsg(messageString);
-                if (currentMessage.getReceiver().equals(broadcastID) || currentMessage.getReceiver().equals(this.getAgName()))
-                    circ.addMsg(currentMessage);
-            } catch (Exception e) {
-                e.printStackTrace(System.out);
-            }
-        }
-    }
-    */
 }
