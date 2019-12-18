@@ -12,7 +12,6 @@ public class SaviAgentArch {
 
     private SaviAgent theAgent;
 
-
     /**
      * Creates the Jason MAS Builder
      * For now there's only one type of Jason agent in the sense of its capabilities towards the environment
@@ -27,8 +26,8 @@ public class SaviAgentArch {
      * Start the agent.
      */
     public void startAgents() {
-        Thread t1 = new Thread(this.theAgent);
-        t1.start();
+        Thread agentThread = new Thread(this.theAgent);
+        agentThread.start();
     }
 
     /**
