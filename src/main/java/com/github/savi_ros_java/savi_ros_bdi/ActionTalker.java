@@ -12,6 +12,9 @@ public class ActionTalker implements Runnable {
     // Agent state object - where the actions will come from
     private SyncAgentState agentState;
 
+    // The node for passing messages to
+    private ConnectedNode connectedNode;
+
     /**
      * Default constructor - don't use
      */
@@ -23,15 +26,24 @@ public class ActionTalker implements Runnable {
      */
     public ActionTalker(final ConnectedNode connectedNode) {
 
+        // Set the connectedNode parameter
+        this.connectedNode = connectedNode;
+
         // Get access to the agent state (a singleton)
         this.agentState = SyncAgentState.getSyncAgentState();
-
-        System.out.println("***** Built the action talker object. *****");
-
     }
 
+    /**
+     * The run process for the ActionTalker
+     * It checks if there is an action and sends it to ROS.
+     */
     public void run() {
-        System.out.println("***** The Action talker made it to the run method. *****");
+        String action;
+        for(;;) {
+            if (this.agentState.isActionAvailable()) {
+                action = String.valueOf(this.agentState.getAction());
+                System.out.println("***** The Action requested was: " + action + " *****");
+            }
+        }
     }
-
 }
