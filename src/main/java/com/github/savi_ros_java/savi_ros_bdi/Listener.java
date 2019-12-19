@@ -33,8 +33,7 @@ public class Listener extends AbstractNodeMain {
 
     private SyncAgentState agentState;
     private SaviAgentArch agent;
-    private ActionTalker actionTalker;
-
+    
     /**
      * Provide name of this node when requested.
      * @return
@@ -54,10 +53,7 @@ public class Listener extends AbstractNodeMain {
 
         // Initialize the agent
         this.agent = new SaviAgentArch();
-        this.agent.startAgents();
-
-        // Setup the action talker, for replying with actions at the end of the reasoning cycle
-        this.actionTalker = new ActionTalker(connectedNode);
+        this.agent.startAgents(connectedNode);
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);

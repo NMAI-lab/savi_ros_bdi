@@ -7,7 +7,10 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Publisher;
 
-public class ActionTalker {
+public class ActionTalker implements Runnable {
+
+    // Agent state object - where the actions will come from
+    private SyncAgentState agentState;
 
     /**
      * Default constructor - don't use
@@ -20,8 +23,15 @@ public class ActionTalker {
      */
     public ActionTalker(final ConnectedNode connectedNode) {
 
-        System.out.println("Built the action talker object.");
+        // Get access to the agent state (a singleton)
+        this.agentState = SyncAgentState.getSyncAgentState();
 
+        System.out.println("***** Built the action talker object. *****");
+
+    }
+
+    public void run() {
+        System.out.println("***** The Action talker made it to the run method. *****");
     }
 
 }

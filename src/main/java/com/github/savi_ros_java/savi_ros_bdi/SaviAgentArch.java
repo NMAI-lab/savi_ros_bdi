@@ -11,6 +11,7 @@ package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 public class SaviAgentArch {
 
     private SaviAgent theAgent;
+    private ActionTalker actionTalker;
 
     /**
      * Creates the Jason MAS Builder
@@ -19,15 +20,25 @@ public class SaviAgentArch {
      * type.asl where type is the agent attribute "type".
      */
     public SaviAgentArch() {
+        // Build the agent
         this.theAgent = new SaviAgent("0", "demo");
+
+        // Setup the action talker, for replying with actions at the end of the reasoning cycle
+        this.actionTalker = new ActionTalker(connectedNode);
     }
 
     /**
      * Start the agent.
      */
-    public void startAgents() {
+    public void startAgents(final ConnectedNode connectedNode) {
+
+        // Run the agent thread
         Thread agentThread = new Thread(this.theAgent);
         agentThread.start();
+
+        // Run the action talking thread
+        Thread actionTalingThread = new Thread(this.actionTalker);
+        actionTalingThread.start();
     }
 
     /**
