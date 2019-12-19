@@ -33,7 +33,7 @@ public class Listener extends AbstractNodeMain {
 
     private SyncAgentState agentState;
     private SaviAgentArch agent;
-    
+
     /**
      * Provide name of this node when requested.
      * @return
@@ -52,8 +52,8 @@ public class Listener extends AbstractNodeMain {
     public void onStart(ConnectedNode connectedNode) {
 
         // Initialize the agent
-        this.agent = new SaviAgentArch();
-        this.agent.startAgents(connectedNode);
+        this.agent = new SaviAgentArch(connectedNode);
+        this.agent.startAgents();
 
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);

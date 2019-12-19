@@ -14,12 +14,17 @@ public class SaviAgentArch {
     private ActionTalker actionTalker;
 
     /**
+     * Need a connectedNode, can't have default constructor
+     */
+    private SaviAgentArch();
+
+    /**
      * Creates the Jason MAS Builder
      * For now there's only one type of Jason agent in the sense of its capabilities towards the environment
      * (go, stop, turn right, turn left) but each agent can have its plans. The plans should be in a file
      * type.asl where type is the agent attribute "type".
      */
-    public SaviAgentArch() {
+    public SaviAgentArch(final ConnectedNode connectedNode) {
         // Build the agent
         this.theAgent = new SaviAgent("0", "demo");
 
@@ -30,7 +35,7 @@ public class SaviAgentArch {
     /**
      * Start the agent.
      */
-    public void startAgents(final ConnectedNode connectedNode) {
+    public void startAgents() {
 
         // Run the agent thread
         Thread agentThread = new Thread(this.theAgent);
