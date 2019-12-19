@@ -49,7 +49,7 @@ public class ActionTalker implements Runnable {
             protected void loop() throws InterruptedException {
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
                 if (agentState.isActionAvailable()) {                  // Check for an action
-                    String action = String.valueOf(this.agentState.getAction());   // Get the action
+                    String action = String.valueOf(agentState.getAction());   // Get the action
                     std_msgs.String str = publisher.newMessage();           // Build a new message
                     str.setData(action);                                    // Set the action as the message
                     publisher.publish(str);                                 // Send the message
