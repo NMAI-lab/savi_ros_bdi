@@ -18,10 +18,12 @@ public class ActionTalker implements Runnable {
     /**
      * Default constructor - don't use
      */
-    private ActionTalker() {}
+    private ActionTalker() {
+    }
 
     /**
      * Constructor
+     *
      * @param connectedNode Connection to the ROS node for messages
      */
     public ActionTalker(final ConnectedNode connectedNode) {
@@ -38,12 +40,22 @@ public class ActionTalker implements Runnable {
      * It checks if there is an action and sends it to ROS.
      */
     public void run() {
-        String action;
-        for(;;) {
-            if (this.agentState.isActionAvailable()) {
-                action = String.valueOf(this.agentState.getAction());
-                System.out.println("***** The Action requested was: " + action + " *****");
+
+        String action;  // Placeholder for the action message
+
+        // Setup the publisher
+        final Publisher<std_msgs.String> publisher = connectedNode.newPublisher("actions", std_msgs.String._TYPE);
+
+        // This CancellableLoop will be canceled automatically when the node shuts down.
+        connectedNode.executeCancellableLoop(new CancellableLoop() {
+            protected void loop() throws InterruptedException {
+                if (this.agentState.isActionAvailable()) {                  // Check for an action
+                    action = String.valueOf(this.agentState.getAction());   // Get the action
+                    std_msgs.String str = publisher.newMessage();           // Build a new message
+                    str.setData(action);                                    // Set the action as the message
+                    publisher.publish(str);                                 // Send the message
+                }
             }
-        }
+        });
     }
 }
