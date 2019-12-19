@@ -24,7 +24,7 @@ public class SaviAgentArch {
     /**
      * Need a connectedNode, can't have default constructor
      */
-    private SaviAgentArch();
+    private SaviAgentArch(){}
 
     /**
      * Creates the Jason MAS Builder
