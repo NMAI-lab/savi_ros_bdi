@@ -52,7 +52,7 @@ public class Listener extends AbstractNodeMain {
     public void onStart(ConnectedNode connectedNode) {
 
         // Initialize the agent
-        this.agent = new SaviAgentArch();
+        this.agent = new SaviAgentArch(connectedNode);
         this.agent.startAgents();
 
         final Log log = connectedNode.getLog();

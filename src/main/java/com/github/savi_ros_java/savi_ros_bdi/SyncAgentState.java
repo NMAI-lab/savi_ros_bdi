@@ -9,12 +9,17 @@ package com.github.rosjava.savi_ros_java.savi_ros_bdi;
  * @date 6 December 2019
  */
 public class SyncAgentState {
+
+    // Location for the perception to be stored. Replace with a queue later
     private String perception;
     private boolean perceptionAvailable;
 
+    // Location for the action to be stored. Replace with a queue later
+    private String action;
+    private boolean actionAvailable;
+
     // Static instance of this singleton class
     private static SyncAgentState agentState;
-
 
     /**
      * Mehthod for accessing this singleton class
@@ -35,6 +40,7 @@ public class SyncAgentState {
      */
     private SyncAgentState() {
         this.perceptionAvailable = false;
+        this.actionAvailable = false;
     }
 
 
@@ -60,16 +66,36 @@ public class SyncAgentState {
      * @return
      */
     public synchronized String getPerceptions() {
-        this.perceptionAvailable = false;
-        return this.perception;
+        if (isPerceptionAvailable()) {
+            this.perceptionAvailable = false;
+            return this.perception;
+        } else {
+            return null;
+        }
+    }
+
+    public synchronized boolean isActionAvailable() {
+        return this.actionAvailable;
     }
 
     /**
      * Provide the action the agent wants to execute (Agent side)
-     * @param action
+     * @param newAction
      */
-    public synchronized void addAction(String action) {
-        System.out.println("Action to execute: ");
-        System.out.println(action);
+    public synchronized void addAction(String newAction) {
+        this.action = String.valueOf(newAction);
+        this.actionAvailable = true;
+    }
+
+    /**
+     * Get the action that the agent has requested
+     */
+    public synchronized String getAction() {
+        if (isActionAvailable()) {
+            this.actionAvailable = false;
+            return this.action;
+        } else {
+            return null;
+        }
     }
 }
