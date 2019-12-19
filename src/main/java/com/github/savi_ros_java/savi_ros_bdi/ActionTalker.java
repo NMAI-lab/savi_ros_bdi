@@ -10,7 +10,7 @@ import org.ros.node.topic.Publisher;
 public class ActionTalker implements Runnable {
 
     // Agent state object - where the actions will come from
-    private SyncAgentState agentState;
+    //private SyncAgentState agentState;
 
     // The node for passing messages to
     private ConnectedNode connectedNode;
@@ -32,25 +32,24 @@ public class ActionTalker implements Runnable {
         this.connectedNode = connectedNode;
 
         // Get access to the agent state (a singleton)
-        this.agentState = SyncAgentState.getSyncAgentState();
+        //this.agentState = SyncAgentState.getSyncAgentState();
     }
 
     /**
      * The run process for the ActionTalker
      * It checks if there is an action and sends it to ROS.
+     * Based on the Talker.java tutorial from ROS.
      */
     public void run() {
-
-        String action;  // Placeholder for the action message
-
         // Setup the publisher
         final Publisher<std_msgs.String> publisher = connectedNode.newPublisher("actions", std_msgs.String._TYPE);
 
         // This CancellableLoop will be canceled automatically when the node shuts down.
         connectedNode.executeCancellableLoop(new CancellableLoop() {
             protected void loop() throws InterruptedException {
-                if (this.agentState.isActionAvailable()) {                  // Check for an action
-                    action = String.valueOf(this.agentState.getAction());   // Get the action
+                SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+                if (agentState.isActionAvailable()) {                  // Check for an action
+                    String action = String.valueOf(this.agentState.getAction());   // Get the action
                     std_msgs.String str = publisher.newMessage();           // Build a new message
                     str.setData(action);                                    // Set the action as the message
                     publisher.publish(str);                                 // Send the message
