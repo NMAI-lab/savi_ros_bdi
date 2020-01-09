@@ -8,7 +8,7 @@ Java setup:
 - mkdir SAVI_ROS
 - cd SAVI_ROS
 - mkdir rosjavaWorkspace
-- source ~/rosjava/devel/setup.bash
+- SKIP THIS LINE (TEST THIS) source ~/rosjava/devel/setup.bash
 - cd rosjavaWorkspace/
 - mkdir src
 - cd src
