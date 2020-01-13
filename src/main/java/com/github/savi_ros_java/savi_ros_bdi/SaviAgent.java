@@ -110,7 +110,9 @@ public class SaviAgent extends AgArch implements Runnable {
     public void act(ActionExec action) {
         // Get the action term
         Structure actionTerm = action.getActionTerm();
+        String actionString = actionTerm.toString();
 
+        /*
         System.out.println("Structure as string is: " + actionTerm.toString());
         //System.out.println("ActionExec as string is: " action.toString());
 
@@ -142,6 +144,7 @@ public class SaviAgent extends AgArch implements Runnable {
             actionString = "thrust(down)";
         else if (actionTerm.equals(hover))
             actionString = "hover";
+        */
 
         // Add the action to agentState
         agentState.addAction(actionString);
