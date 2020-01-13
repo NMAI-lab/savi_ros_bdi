@@ -111,6 +111,9 @@ public class SaviAgent extends AgArch implements Runnable {
         // Get the action term
         Structure actionTerm = action.getActionTerm();
 
+        System.our.println("Structure as string is: " + actionTerm.toString());
+        System.out.println("ActionExec as string is: " action.toString());
+
         // Define the action string
         String actionString = "";
 
