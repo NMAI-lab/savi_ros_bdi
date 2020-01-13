@@ -112,40 +112,6 @@ public class SaviAgent extends AgArch implements Runnable {
         Structure actionTerm = action.getActionTerm();
         String actionString = actionTerm.toString();
 
-        /*
-        System.out.println("Structure as string is: " + actionTerm.toString());
-        //System.out.println("ActionExec as string is: " action.toString());
-
-        // Define the action string
-        String actionString = "";
-
-        // Define terms for possible actions (should move these to private class parameters)
-        Term left = Literal.parseLiteral("turn(left)");
-        Term right = Literal.parseLiteral("turn(right)");
-        Term go = Literal.parseLiteral("thrust(on)");
-        Term stop = Literal.parseLiteral("thrust(off)");
-        Term up = Literal.parseLiteral("thrust(up)");
-        Term down = Literal.parseLiteral("thrust(down)");
-        Term hover = Literal.parseLiteral("hover");
-
-
-        // Check what action is being performed, update actionString accordingly.
-        if (actionTerm.equals(left)) {
-            actionString = "turn(left)";
-        } else if (actionTerm.equals(right))
-            actionString = "turn(right)";
-        else if (actionTerm.equals(go))
-            actionString = "thrust(on)";
-        else if (actionTerm.equals(stop))
-            actionString = "thrust(off)";
-        else if (actionTerm.equals(up))
-            actionString = "thrust(up)";
-        else if (actionTerm.equals(down))
-            actionString = "thrust(down)";
-        else if (actionTerm.equals(hover))
-            actionString = "hover";
-        */
-
         // Add the action to agentState
         agentState.addAction(actionString);
 
