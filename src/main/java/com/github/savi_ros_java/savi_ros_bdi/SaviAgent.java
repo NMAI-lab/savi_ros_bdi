@@ -6,6 +6,9 @@ import jason.asSyntax.*;
 
 import java.io.*;
 import java.util.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
@@ -19,26 +22,37 @@ import java.util.*;
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
+    private final String configFilePath = "../../../resources/main/settings.cfg";
+
     private String name;
     private SyncAgentState agentState;
     private boolean running;
 
-    public SaviAgent(String id, String type) {
+    //public SaviAgent(String id, String type) {
+    public SaviAgent() {
 
-        agentState = SyncAgentState.getSyncAgentState();
+        // Load parameters from configuration file
+        Properties agentProperties = this.loadProperties();
+        String aslPath = agentProperties.getProperty("ASL_PATH");
+        String agentType = agentProperties.getProperty("AGENT_TYPE");
+        String agentName = agentProperties.getProperty("AGENT_NAME");
 
         // set up the Jason agent
         try {
             Agent ag = new Agent();
             new TransitionSystem(ag, null, null, this);
-            this.name = id;
+            this.name = agentName;
 
-            InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
+            //InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
+            InputStream aslFile = new FileInputStream(aslPath);
             ag.initAg();
-            ag.load(aslFile, type);
+            ag.load(aslFile, agentType);
         } catch (Exception e) {
             System.out.println("Init error " + e.toString());
         }
+
+        // Get the agent state
+        agentState = SyncAgentState.getSyncAgentState();
     }
 
     /**
@@ -155,5 +169,37 @@ public class SaviAgent extends AgArch implements Runnable {
             Thread.sleep(100);                    // TODO: Need to revisit this
         } catch (InterruptedException e) {
         }
+    }
+
+    /**
+     * Load the properties of the agent from the configuration file
+     * @return
+     */
+    private Properties loadProperties() {
+        Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
+        System.out.println("Current directory: " + path.toString());
+
+        // Load parameters from configuration file
+        InputStream input = null;
+        Properties agentProperties = new Properties();
+        String configFileName = this.configFilePath;
+
+        try {
+            input = new FileInputStream(configFileName);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+            System.out.println(e.toString());
+        }
+
+        try{
+            agentProperties.load(input);
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+            System.out.println(e.toString());
+        }
+
+        return agentProperties;
     }
 }
