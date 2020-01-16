@@ -19,7 +19,7 @@ import java.util.*;
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
-    private static final String configFilePath = "../../../resources/main/settings.cfg",
+    private final String configFilePath = "../../../resources/main/settings.cfg",
 
     private String name;
     private SyncAgentState agentState;
