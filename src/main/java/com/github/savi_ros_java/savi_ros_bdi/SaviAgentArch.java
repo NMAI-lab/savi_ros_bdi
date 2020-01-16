@@ -35,7 +35,8 @@ public class SaviAgentArch {
      */
     public SaviAgentArch(final ConnectedNode connectedNode) {
         // Build the agent
-        this.theAgent = new SaviAgent("0", "demo");
+        //this.theAgent = new SaviAgent("0", "demo");
+        this.theAgent = new SaviAgent();
 
         // Setup the action talker, for replying with actions at the end of the reasoning cycle
         this.actionTalker = new ActionTalker(connectedNode);

@@ -23,22 +23,44 @@ public class SaviAgent extends AgArch implements Runnable {
     private SyncAgentState agentState;
     private boolean running;
 
-    public SaviAgent(String id, String type) {
+    //public SaviAgent(String id, String type) {
+    public SaviAgent() {
 
-        agentState = SyncAgentState.getSyncAgentState();
+        // Load parameters from configuration file
+        InputStream in = null;
+        Properties agentProperties = new Properties();
+
+        try {
+            in = ResourceManager.getResourceStream("../../../resources/main/asl/settings.cfg");
+            agentProperties.load(in);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+            System.out.println();
+        }
+
+        // Fetch properties from the config file
+        String aslPath = String.parseString(agentProperties.getProperty("ASL_PATH"));
+        String agentType = String.parseString(agentProperties.getProperty("AGENT_TYPE"));
+        String agentName = Integer.parseInt(modelProps.getProperty("AGENT_NAME"));
 
         // set up the Jason agent
         try {
             Agent ag = new Agent();
             new TransitionSystem(ag, null, null, this);
-            this.name = id;
+            this.name = agentName;
 
-            InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
+            //InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
+            InputStream aslFile = new FileInputStream(aslPath);
             ag.initAg();
-            ag.load(aslFile, type);
+            ag.load(aslFile, agentType);
         } catch (Exception e) {
             System.out.println("Init error " + e.toString());
         }
+
+        // Get the agent state
+        agentState = SyncAgentState.getSyncAgentState();
     }
 
     /**
