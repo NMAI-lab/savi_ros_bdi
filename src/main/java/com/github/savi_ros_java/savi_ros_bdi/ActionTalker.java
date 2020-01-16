@@ -9,9 +9,6 @@ import org.ros.node.topic.Publisher;
 
 public class ActionTalker implements Runnable {
 
-    // Agent state object - where the actions will come from
-    //private SyncAgentState agentState;
-
     // The node for passing messages to
     private ConnectedNode connectedNode;
 
@@ -30,9 +27,6 @@ public class ActionTalker implements Runnable {
 
         // Set the connectedNode parameter
         this.connectedNode = connectedNode;
-
-        // Get access to the agent state (a singleton)
-        //this.agentState = SyncAgentState.getSyncAgentState();
     }
 
     /**
