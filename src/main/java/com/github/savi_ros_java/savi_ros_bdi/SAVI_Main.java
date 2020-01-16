@@ -29,7 +29,7 @@ import jason.asSyntax.*;
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
  */
-public class Listener extends AbstractNodeMain {
+public class SAVI_Main extends AbstractNodeMain {
 
     private SaviAgentArch agent;
 

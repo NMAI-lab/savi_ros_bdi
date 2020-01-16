@@ -31,7 +31,7 @@ Running:
 
 - ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin 
 - ./savi_ros_bdi com.github.rosjava.savi_ros_java.savi_ros_bdi.Talker
-- ./savi_ros_bdi com.github.rosjava.savi_ros_java.savi_ros_bdi.Listener
+- ./savi_ros_bdi com.github.rosjava.savi_ros_java.savi_ros_bdi.SAVI_Main
 
 
 - rosrun savi_ros_py talker.py  
