@@ -66,8 +66,6 @@ public class Listener extends AbstractNodeMain {
                 // Handle the message
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
                 agentState.setPerceptions(rxLiteral.toString());
-
-                //log.info("I heard: \"" + rxLiteral.toString() + "\"");
             }
         });
     }
