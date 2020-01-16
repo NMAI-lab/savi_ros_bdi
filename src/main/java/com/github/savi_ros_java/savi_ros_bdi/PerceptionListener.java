@@ -26,35 +26,19 @@ import org.ros.node.topic.Subscriber;
 
 import jason.asSyntax.*;
 
-/**
- * A simple {@link Subscriber} {@link NodeMain}.
- */
-public class Listener extends AbstractNodeMain {
+public class PerceptionListener implements Runnable {
 
-    private SaviAgentArch agent;
+    // The node for passing messages to
+    private ConnectedNode connectedNode;
 
-    /**
-     * Provide name of this node when requested.
-     * @return
-     */
-    @Override
-    public GraphName getDefaultNodeName() {
-        return GraphName.of("rosjava/listener");
+    private PerceptionListener() { }
+
+    public PerceptionListener(final ConnectedNode connectedNode) {
+        // Set the connectedNode parameter
+        this.connectedNode = connectedNode;
     }
 
-
-    /**
-     * Start method for the node (can think of this as the 'main()' method.
-     * @param connectedNode
-     */
-    @Override
-    public void onStart(ConnectedNode connectedNode) {
-
-        // Initialize the agent
-        this.agent = new SaviAgentArch(connectedNode);
-        this.agent.startAgents();
-
-        /*
+    public run() {
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
         subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
@@ -68,6 +52,5 @@ public class Listener extends AbstractNodeMain {
                 agentState.setPerceptions(rxLiteral.toString());
             }
         });
-        */
     }
 }
