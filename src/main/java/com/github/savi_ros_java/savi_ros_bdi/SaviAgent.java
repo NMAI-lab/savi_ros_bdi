@@ -6,7 +6,9 @@ import jason.asSyntax.*;
 
 import java.io.*;
 import java.util.*;
-import java.nio.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
