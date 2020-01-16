@@ -38,7 +38,7 @@ public class PerceptionListener implements Runnable {
         this.connectedNode = connectedNode;
     }
 
-    public run() {
+    public void run() {
         final Log log = connectedNode.getLog();
         Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
         subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
