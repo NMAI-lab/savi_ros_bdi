@@ -31,7 +31,7 @@ public class SaviAgent extends AgArch implements Runnable {
         Properties agentProperties = new Properties();
 
         try {
-            in = ResourceManager.getResourceStream("../../../resources/main/asl/settings.cfg");
+            in = new BufferedReader(new InputStreamReader(getResourceStream("../../../resources/main/asl/settings.cfg")));
             agentProperties.load(in);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
