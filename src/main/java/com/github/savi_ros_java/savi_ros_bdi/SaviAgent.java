@@ -175,7 +175,7 @@ public class SaviAgent extends AgArch implements Runnable {
      */
     private Properties loadProperties() {
         Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
-        System.out.println("Current directory: " + path.toString(););
+        System.out.println("Current directory: " + path.toString());
 
         // Load parameters from configuration file
         InputStream input = null;
