@@ -12,7 +12,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- */
+
 
 package com.github.rosjava.savi_ros_java.savi_ros_bdi;
 
@@ -25,7 +25,7 @@ import org.ros.node.topic.Publisher;
 
 /**
  * A simple {@link Publisher} {@link NodeMain}.
- */
+
 public class Talker extends AbstractNodeMain {
 
     @Override
@@ -58,3 +58,4 @@ public class Talker extends AbstractNodeMain {
         });
     }
 }
+ */
