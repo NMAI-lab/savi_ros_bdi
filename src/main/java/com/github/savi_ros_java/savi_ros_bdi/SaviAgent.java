@@ -174,7 +174,8 @@ public class SaviAgent extends AgArch implements Runnable {
      * @return
      */
     private Properties loadProperties() {
-        System.out.println("Current directory: " + FileSystems.getDefault().getPath("."));
+        Path path = FileSystems.getDefault().getPath(".").toAbsolutePath();
+        System.out.println("Current directory: " + path.toString(););
 
         // Load parameters from configuration file
         InputStream input = null;
@@ -198,10 +199,5 @@ public class SaviAgent extends AgArch implements Runnable {
         }
 
         return agentProperties;
-
-        // Fetch properties from the config file
-        //String aslPath = agentProperties.getProperty("ASL_PATH");
-        //String agentType = agentProperties.getProperty("AGENT_TYPE");
-        //String agentName = agentProperties.getProperty("AGENT_NAME");
     }
 }
