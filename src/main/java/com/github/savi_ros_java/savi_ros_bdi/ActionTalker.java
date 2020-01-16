@@ -24,7 +24,6 @@ public class ActionTalker implements Runnable {
      * @param connectedNode Connection to the ROS node for messages
      */
     public ActionTalker(final ConnectedNode connectedNode) {
-
         // Set the connectedNode parameter
         this.connectedNode = connectedNode;
     }
