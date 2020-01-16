@@ -19,6 +19,8 @@ import java.util.*;
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
+    private static final String configFilePath = "../../../resources/main/settings.cfg",
+
     private String name;
     private SyncAgentState agentState;
     private boolean running;
@@ -27,20 +29,7 @@ public class SaviAgent extends AgArch implements Runnable {
     public SaviAgent() {
 
         // Load parameters from configuration file
-        InputStream in = null;
-        Properties agentProperties = new Properties();
-
-        try {
-            in = getClass().getClassLoader().getResourceAsStream("../../../resources/main/asl/settings.cfg");
-            agentProperties.load(in);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (Exception e) {
-            System.out.println("Exception occurred");
-            System.out.println(e.toString());
-        }
-
-        // Fetch properties from the config file
+        Properties agentProperties = this.loadProperties();
         String aslPath = agentProperties.getProperty("ASL_PATH");
         String agentType = agentProperties.getProperty("AGENT_TYPE");
         String agentName = agentProperties.getProperty("AGENT_NAME");
@@ -177,5 +166,41 @@ public class SaviAgent extends AgArch implements Runnable {
             Thread.sleep(100);                    // TODO: Need to revisit this
         } catch (InterruptedException e) {
         }
+    }
+
+    /**
+     * Load the properties of the agent from the configuration file
+     * @return
+     */
+    private Properties loadProperties() {
+        System.our.println("Current directory: " + FileSystems.getDefault().getPath("."));
+
+        // Load parameters from configuration file
+        InputStream input = null;
+        Properties agentProperties = new Properties();
+        String configFileName = this.configFilePath;
+
+        try {
+            input = new FileInputStream(configFileName);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+            System.out.println(e.toString());
+        }
+
+        try{
+            agentProperties.load(input);
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+            System.out.println(e.toString());
+        }
+
+        return agentProperties;
+
+        // Fetch properties from the config file
+        //String aslPath = agentProperties.getProperty("ASL_PATH");
+        //String agentType = agentProperties.getProperty("AGENT_TYPE");
+        //String agentName = agentProperties.getProperty("AGENT_NAME");
     }
 }
