@@ -87,7 +87,6 @@ public class SaviAgent extends AgArch implements Runnable {
         }
 
         System.out.println("I made it past the delay loop.");
-
         String receivedPerception = this.agentState.getPerceptions();
         System.out.println("Agent received perception: ");
         System.out.println(receivedPerception);

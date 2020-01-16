@@ -20,6 +20,7 @@ public class SaviAgentArch {
 
     private SaviAgent theAgent;
     private ActionTalker actionTalker;
+    private PerceptionListener perceptionListener;
 
     /**
      * Need a connectedNode, can't have default constructor
@@ -38,6 +39,9 @@ public class SaviAgentArch {
 
         // Setup the action talker, for replying with actions at the end of the reasoning cycle
         this.actionTalker = new ActionTalker(connectedNode);
+
+        // Setup the perception listener, responsible for listenening for perceptions and passing them to the agent
+        this.perceptionListener = new PerceptionListener(connectedNode);
     }
 
     /**
@@ -50,8 +54,12 @@ public class SaviAgentArch {
         agentThread.start();
 
         // Run the action talking thread
-        Thread actionTalingThread = new Thread(this.actionTalker);
-        actionTalingThread.start();
+        Thread actionTalkingThread = new Thread(this.actionTalker);
+        actionTalkingThread.start();
+
+        // Run the perception listening thread
+        Thread perceptionListeningThread = new Thread(this.perceptionListener);
+        perceptionListeningThread.start();
     }
 
     /**
