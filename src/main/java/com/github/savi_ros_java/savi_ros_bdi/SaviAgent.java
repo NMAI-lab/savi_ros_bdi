@@ -41,9 +41,9 @@ public class SaviAgent extends AgArch implements Runnable {
         }
 
         // Fetch properties from the config file
-        String aslPath = String.parseString(agentProperties.getProperty("ASL_PATH"));
-        String agentType = String.parseString(agentProperties.getProperty("AGENT_TYPE"));
-        String agentName = Integer.parseInt(modelProps.getProperty("AGENT_NAME"));
+        String aslPath = agentProperties.getProperty("ASL_PATH");
+        String agentType = agentProperties.getProperty("AGENT_TYPE");
+        String agentName = agentProperties.getProperty("AGENT_NAME");
 
         // set up the Jason agent
         try {
