@@ -1,4 +1,4 @@
-package com.github.rosjava.savi_ros_java.savi_ros_bdi;
+package rosjava.savi_ros_java.savi_ros_bdi;
 
 /**
  * Singleton class for passing perceptions, actions, messages between the agent and the environment.
