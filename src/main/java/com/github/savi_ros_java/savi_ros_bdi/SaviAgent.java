@@ -33,24 +33,9 @@ public class SaviAgent extends AgArch implements Runnable {
 
         // Load parameters from configuration file
         Properties agentProperties = this.loadProperties();
-        String aslPath = agentProperties.getProperty("ASL_PATH");
-        String agentType = agentProperties.getProperty("AGENT_TYPE");
-        String agentName = agentProperties.getProperty("AGENT_NAME");
 
-        // set up the Jason agent
-        try {
-            Agent ag = new Agent();
-            new TransitionSystem(ag, null, null, this);
-            this.name = agentName;
-
-            //InputStream aslFile = new FileInputStream("../../../resources/main/asl/" + type + ".asl");
-            InputStream aslFile = new FileInputStream(aslPath);
-            ag.initAg();
-            ag.load(aslFile, agentType);
-        } catch (Exception e) {
-            System.out.println("Init error loading asl file: " + e.toString());
-            System.out.println("ASL Path was: " + aslPath);
-        }
+        // Load the agent
+        this.loadAgent(agentProperties);
 
         // Get the agent state
         agentState = SyncAgentState.getSyncAgentState();
@@ -202,5 +187,31 @@ public class SaviAgent extends AgArch implements Runnable {
         }
 
         return agentProperties;
+    }
+
+    /**
+     * Set up the agent usign the provided properties
+     * @param agentProperties
+     */
+    private void loadAgent(Properties agentProperties) {
+
+        // Get the properteis
+        String aslPath = agentProperties.getProperty("ASL_PATH");
+        String agentType = agentProperties.getProperty("AGENT_TYPE");
+        String agentName = agentProperties.getProperty("AGENT_NAME");
+
+        // Set up the Jason agent
+        try {
+            Agent ag = new Agent();
+            new TransitionSystem(ag, null, null, this);
+            this.name = agentName;
+
+            InputStream aslFile = new FileInputStream(aslPath);
+            ag.initAg();
+            ag.load(aslFile, agentType);
+        } catch (Exception e) {
+            System.out.println("Init error loading asl file: " + e.toString());
+            System.out.println("ASL Path was: " + aslPath);
+        }
     }
 }
