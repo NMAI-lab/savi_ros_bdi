@@ -48,7 +48,8 @@ public class SaviAgent extends AgArch implements Runnable {
             ag.initAg();
             ag.load(aslFile, agentType);
         } catch (Exception e) {
-            System.out.println("Init error " + e.toString());
+            System.out.println("Init error loading asl file: " + e.toString());
+            System.out.println("ASL Path was: " + aslPath);
         }
 
         // Get the agent state
