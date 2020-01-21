@@ -9,7 +9,6 @@ Welcome to the savi_ros_bdi project! This project provides a linkage between age
 This project uses ROS Java. It is recommended that you familiarize yourself with the documentation available at http://wiki.ros.org/rosjava/Tutorials/kinetic and on their github repository at https://github.com/rosjava.
 
 Please note, we had difficulties installing and configuring rosjava using the instructions provided in the tutorials. As a workaround to those challenges, we installed rosjava directly to the directory of your choice from sources using the following proceedure:
-
 ```
 $ git clone https://github.com/rosjava/rosjava_core.git
 $ cd rosjava_core
@@ -38,24 +37,22 @@ $ source devel/setup.bash
 ```
 Note that we created a package called savi_ros_bdi using ```catkin_create_rosjava_project``` and then immediately deleted it using ```rm -d -r savi_ros_bdi```. This was followed by cloning the source code from this github repository. This step is important as the ```catkin_create_rosjava_project``` adds the savi_ros_bdi project to the build process that is used by ```catkin_make```. Without doing this, you would have to manually add the package to the build process, otherwise catkin_make will never build the package.
 
+## Running
+To run the savi_ros_bdi process perform the following proceedure.
+
+First, in a seperate terminal, run roscore:
+```
+$ source devel/setup.bash
+$ roscore
+```
+In a seperate terminal window, run the savi_ros_java.savi_ros_bdi.SAVI_Main process:
+
+```
+$ source devel/setup.bash
+$ cd ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin
+- ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
+```
+The process will subscribe to the perceptions topic and publish to the actions topic.
+
 ## Example useage
 An example of how to use this package is available at https://github.com/NMAI-lab/savi_ros_demo. At that page you will find a sample BDI program written for Jason using AgentSpeak as well as a Python script which generates example perceptions for an agent to perceive. Another Python script listens for actions that the agent wants to execute.
-
-## Running
-
-
-
-Python setup (for the sister repository):
-- cd ~/SAVI_ROS/rosjavaWorkspace/src
-- catkin_create_pkg savi_ros_py std_msgs rospy roscpp
-- cd savi_ros_py 
-- mkdir scripts -> this will be the repository on github
-- catkin_make -> from the home directory
-
-Running:
-- source devel/setup.bash (in each terminal window)
-- roscore (in one terminal window)
-- catkin_make (from root of workspace)
-
-- ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin 
-- ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
