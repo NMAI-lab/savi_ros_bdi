@@ -7,6 +7,12 @@ As mentioned above, this project is aimed at bridging the gap between BDI agents
 
 BDI agents implemented with Jason run in a polling loop, where the agent perceives the environment and then reasons about what it has perceived as well as it's own knowledge, abilities, and objectives before selecting an action to execute. In this project, we have built a ros package for connecting a Jason agent to ros. The agent subscibes to the ```perceptions``` topic and publishes to the ```actions``` topic. The messages are of the form of logical predicates, as is expected by AgnetSpeak. For example, a perception for position in a cartesian coordinate system could be ```position(X,Y,Z)``` where X, Y, and Z are variables representing the position of the robot provided by some sensor connected to it. Actions are similarly formated.
 
+This project builds on previous work done on the SAVI project, available at https://github.com/NMAI-lab/SAVI. The original SAVI project focused on developing a linkage between Jason and a custom simulated environment. In this case, the focus is on making Jason available to any hardware or simulations that are compatible with ros. This implementation is intended to be generic, without any assumptions about the type of environment being used. There are other projects that have sought to link ros and bdi, some examples include (in no particular order): 
+
+- https://github.com/jason-lang/jason-ros
+- https://github.com/lsa-pucrs/jason-ros-releases
+- https://github.com/smart-pucrs/JROS
+
 ## Configuration and installation
 
 This project uses ROS Java. It is recommended that you familiarize yourself with the documentation available at http://wiki.ros.org/rosjava/Tutorials/kinetic and on their github repository at https://github.com/rosjava.
