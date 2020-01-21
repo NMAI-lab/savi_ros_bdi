@@ -1,6 +1,6 @@
 //package com.github.savi_ros_java.savi_ros_bdi;
 
-package com.github.rosjava.savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi;
 
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
