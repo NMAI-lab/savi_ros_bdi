@@ -3,6 +3,9 @@
 Welcome to the savi_ros_bdi project! This project provides a linkage between agents developed for Belief-Desires-Intentions (BDI) in AgentSpeak (using Jason available at http://jason.sourceforge.net/) a connection to robotic systems using the Robot Operating System (ROS, available at https://www.ros.org/). This package uses the rosJava (http://wiki.ros.org/rosjava) package as a means of connecting the Jason BDI agent to ROS.
 
 ## Overview of the project
+As mentioned above, this project is aimed at bridging the gap between BDI agents implemented using AgentSpeak with Jason and robots that use ROS. It is recommended that you familiarize yourself with both Jason and ROS. There is also a Jason book which is very helpful for getting started with BDI. The details are on the Jason website.
+
+BDI agents implemented with Jason run in a polling loop, where the agent perceives the environment and then reasons about what it has perceived as well as it's own knowledge, abilities, and objectives before selecting an action to execute. In this project, we have built a ros package for connecting a Jason agent to ros. The agent subscibes to the ```perceptions``` topic and publishes to the ```actions``` topic. The messages are of the form of logical predicates, as is expected by AgnetSpeak. For example, a perception for position in a cartesian coordinate system could be ```position(X,Y,Z)``` where X, Y, and Z are variables representing the position of the robot provided by some sensor connected to it. Actions are similarly formated.
 
 ## Configuration and installation
 
@@ -31,12 +34,18 @@ $ cd savi_ros_java
 $ catkin_create_rosjava_project savi_ros_bdi
 $ rm -d -r savi_ros_bdi
 $ git clone https://github.com/NMAI-lab/savi_ros_bdi.git
+```
+Note that we created a package called savi_ros_bdi using ```catkin_create_rosjava_project``` and then immediately deleted it using ```rm -d -r savi_ros_bdi```. This was followed by cloning the source code from this github repository. This step is important as the ```catkin_create_rosjava_project``` adds the savi_ros_bdi project to the build process that is used by ```catkin_make```. Without doing this, you would have to manually add the package to the build process, otherwise catkin_make will never build the package.
+
+This package uses a configuration file for setting some key parameters, notably the path to the file containing the AgentSpeak source code for the agent. This configuration file is found at ```savi_ros_bdi/src/main/resources/settings.cfg```. This must be set prior building the agent with catkin_make and running it, as the gradle process invoked by catkin_make copies this file as part of the build process.
+
+Lastly, we can build the project.
+
+```
 $ cd ~/SAVI_ROS/rosjavaWorkspace
 $ catkin_make
 $ source devel/setup.bash
 ```
-Note that we created a package called savi_ros_bdi using ```catkin_create_rosjava_project``` and then immediately deleted it using ```rm -d -r savi_ros_bdi```. This was followed by cloning the source code from this github repository. This step is important as the ```catkin_create_rosjava_project``` adds the savi_ros_bdi project to the build process that is used by ```catkin_make```. Without doing this, you would have to manually add the package to the build process, otherwise catkin_make will never build the package.
-
 ## Running
 To run the savi_ros_bdi process perform the following proceedure.
 
