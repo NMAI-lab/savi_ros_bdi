@@ -39,7 +39,7 @@ public class SAVI_Main extends AbstractNodeMain {
      */
     @Override
     public GraphName getDefaultNodeName() {
-        return GraphName.of("rosjava/listener");
+        return GraphName.of("rosjava/savi_ros_bdi");
     }
 
 
