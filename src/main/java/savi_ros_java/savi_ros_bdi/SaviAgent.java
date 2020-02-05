@@ -206,6 +206,7 @@ public class SaviAgent extends AgArch implements Runnable {
             new TransitionSystem(ag, null, null, this);
             this.name = agentName;
 
+            System.out.println("ASL_PATH: " + aslPath);
             InputStream aslFile = new FileInputStream(aslPath);
             ag.initAg();
             ag.load(aslFile, agentType);
