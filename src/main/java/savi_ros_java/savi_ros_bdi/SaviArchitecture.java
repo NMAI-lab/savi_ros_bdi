@@ -9,6 +9,9 @@ import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
+import savi_ros_java.savi_ros_bdi.agent_core.SaviAgent;
+import savi_ros_java.savi_ros_bdi.ros_connectors.ActionTalker;
+import savi_ros_java.savi_ros_bdi.ros_connectors.PerceptionListener;
 
 /**
  * Based upon a class found in SAVI: https://github.com/NMAI-lab/SAVI
@@ -16,7 +19,7 @@ import org.ros.node.topic.Subscriber;
  * @author Patrick Gavigan
  * @date 6 December 2019
  */
-public class SaviAgentArch {
+public class SaviArchitecture {
 
     private SaviAgent theAgent;
     private ActionTalker actionTalker;
@@ -25,7 +28,7 @@ public class SaviAgentArch {
     /**
      * Need a connectedNode, can't have default constructor
      */
-    private SaviAgentArch(){}
+    private SaviArchitecture(){}
 
     /**
      * Creates the Jason MAS Builder
@@ -33,7 +36,7 @@ public class SaviAgentArch {
      * (go, stop, turn right, turn left) but each agent can have its plans. The plans should be in a file
      * type.asl where type is the agent attribute "type".
      */
-    public SaviAgentArch(final ConnectedNode connectedNode) {
+    public SaviArchitecture(final ConnectedNode connectedNode) {
         // Build the agent
         //this.theAgent = new SaviAgent("0", "demo");
         this.theAgent = new SaviAgent();

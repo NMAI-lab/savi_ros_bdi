@@ -29,7 +29,7 @@ import org.ros.node.topic.Subscriber;
  */
 public class SAVI_Main extends AbstractNodeMain {
 
-    private SaviAgentArch agent;
+    private SaviArchitecture agent;
 
     /**
      * Provide name of this node when requested.
@@ -49,23 +49,7 @@ public class SAVI_Main extends AbstractNodeMain {
     public void onStart(ConnectedNode connectedNode) {
 
         // Initialize the agent
-        this.agent = new SaviAgentArch(connectedNode);
+        this.agent = new SaviArchitecture(connectedNode);
         this.agent.startAgents();
-
-        /*
-        final Log log = connectedNode.getLog();
-        Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
-        subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
-            @Override
-            public void onNewMessage(std_msgs.String message) {
-                // Interpret the message as a literal
-                Literal rxLiteral = Literal.parseLiteral(message.getData());
-
-                // Handle the message
-                SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-                agentState.setPerceptions(rxLiteral.toString());
-            }
-        });
-        */
     }
 }
