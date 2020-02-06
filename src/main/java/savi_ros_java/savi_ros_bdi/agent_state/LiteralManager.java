@@ -11,19 +11,20 @@ import jason.asSyntax.Literal;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LiteralManager {
 
     /**
      * List of literals being managed.
      */
-    private List<Literal> literalList;
+    private Queue<Literal> literals;
 
     /**
      * Default constructor.
      */
     public LiteralManager() {
-        this.literalList = new LinkedList<>();
+        this.literals = new LinkedList<>();
     }
 
     /**
@@ -31,7 +32,7 @@ public class LiteralManager {
      * @return
      */
     public boolean isLiteralAvailable() {
-        return !this.literalList.isEmpty();
+        return !this.literals.isEmpty();
     }
 
     /**
@@ -49,7 +50,7 @@ public class LiteralManager {
         // literalString. Add it to the queue
         int bracketSpot = literalString.indexOf(')');
         String nextPerception = literalString.substring(0, bracketSpot + 1);
-        literalList.add(Literal.parseLiteral(nextPerception));
+        literals.add(Literal.parseLiteral(nextPerception));
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
@@ -61,10 +62,18 @@ public class LiteralManager {
      * Get a copy of the literal list and clear contents
      * @return
      */
-    List<Literal> getLiteralList() {
-        List<Literal> returnList = new LinkedList<>(this.literalList);
-        this.literalList = new LinkedList<>();
+    public List<Literal> getLiterals() {
+        List<Literal> returnList = new LinkedList<>(this.literals);
+        this.literals = new LinkedList<>();
         return returnList;
+    }
+
+    public Literal getNextLiteral() {
+        if (this.isLiteralAvailable()) {
+            return this.literals.remove();
+        } else {
+            return null;
+        }
     }
 
     /**
