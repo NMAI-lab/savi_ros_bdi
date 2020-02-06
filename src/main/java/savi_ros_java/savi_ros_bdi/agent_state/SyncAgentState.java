@@ -25,7 +25,7 @@ public class SyncAgentState {
      * Method for accessing this singleton class
      * @return      Reference to the singleton object
      */
-    public synchronized SyncAgentState getSyncAgentState() {
+    public static synchronized SyncAgentState getSyncAgentState() {
         if (SyncAgentState.agentState == null) {
             SyncAgentState.agentState = new SyncAgentState();
 
