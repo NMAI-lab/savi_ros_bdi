@@ -1,4 +1,4 @@
-package savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi.agent_state;
 
 /**
  * Singleton class for passing perceptions, actions, messages between the agent and the environment.
