@@ -1,4 +1,4 @@
-package savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi.agent_core;
 
 import jason.architecture.AgArch;
 import jason.asSemantics.*;
@@ -45,21 +45,21 @@ public class SaviAgent extends AgArch implements Runnable {
      * Execute the BDI reaoning cycle.
      */
     public void run() {
-        System.out.println("I'm a Jason Agent and I'm starting");
+        System.out.println("I'm a Jason agent_core and I'm starting");
 
         try {
             running = true;
 
             while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
-                System.out.println("Agent is reasoning....");
+                System.out.println("agent_core is reasoning....");
                 getTS().reasoningCycle();
 
                 if (getTS().canSleep()) {
                     sleep();
                 }
             }
-            System.out.println("Agent stopped.");
+            System.out.println("agent_core stopped.");
         } catch (Exception e) {
             System.out.println("Run error " + e.toString());
         }
@@ -88,7 +88,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
         // Get the list of literals to send to the agent
         List<Literal> perceptionLiterals = this.agentState.getPerceptions();
-        System.out.println("Agent Perceiving: ");
+        System.out.println("agent_core Perceiving: ");
         System.out.println(perceptionLiterals.toString());
 
         return perceptionLiterals;

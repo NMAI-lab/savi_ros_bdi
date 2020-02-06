@@ -14,7 +14,7 @@
  * the License.
  */
 
-package savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi.ros_connectors;
 
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;

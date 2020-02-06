@@ -61,7 +61,7 @@ public class SyncAgentState {
     }
 
     /**
-     * Get the perceptions. (Agent side)
+     * Get the perceptions. (agent_core side)
      * @return
      */
     public synchronized List<Literal> getPerceptions() {
@@ -77,7 +77,7 @@ public class SyncAgentState {
     }
 
     /**
-     * Provide the action the agent wants to execute (Agent side)
+     * Provide the action the agent wants to execute (agent_core side)
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
