@@ -24,8 +24,6 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 
-import jason.asSyntax.*;
-
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
  */
@@ -39,7 +37,7 @@ public class SAVI_Main extends AbstractNodeMain {
      */
     @Override
     public GraphName getDefaultNodeName() {
-        return GraphName.of("rosjava/listener");
+        return GraphName.of("rosjava/savi_ros_bdi");
     }
 
 

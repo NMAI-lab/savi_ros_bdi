@@ -6,6 +6,7 @@ import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Publisher;
+import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 public class ActionTalker implements Runnable {
 

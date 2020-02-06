@@ -1,4 +1,8 @@
-package savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi.agent_state;
+
+import jason.asSyntax.Literal;
+
+import java.util.List;
 
 /**
  * Singleton class for passing perceptions, actions, messages between the agent and the environment.
@@ -10,22 +14,18 @@ package savi_ros_java.savi_ros_bdi;
  */
 public class SyncAgentState {
 
-    // Location for the perception to be stored. Replace with a queue later
-    private String perception;
-    private boolean perceptionAvailable;
-
-    // Location for the action to be stored. Replace with a queue later
-    private String action;
-    private boolean actionAvailable;
+    // Location for the perceptions and actions to be stored.
+    private LiteralManager perceptionManager;
+    private LiteralManager actionManager;
 
     // Static instance of this singleton class
     private static SyncAgentState agentState;
 
     /**
-     * Mehthod for accessing this singleton class
+     * Method for accessing this singleton class
      * @return      Reference to the singleton object
      */
-    public static SyncAgentState getSyncAgentState() {
+    public static synchronized SyncAgentState getSyncAgentState() {
         if (SyncAgentState.agentState == null) {
             SyncAgentState.agentState = new SyncAgentState();
 
@@ -39,8 +39,8 @@ public class SyncAgentState {
      *  This is a private constructor as this is a singleton class.
      */
     private SyncAgentState() {
-        this.perceptionAvailable = false;
-        this.actionAvailable = false;
+        this.actionManager = new LiteralManager();
+        this.perceptionManager = new LiteralManager();
     }
 
 
@@ -49,7 +49,7 @@ public class SyncAgentState {
      * @return
      */
     public synchronized boolean isPerceptionAvailable() {
-        return this.perceptionAvailable;
+        return this.perceptionManager.isLiteralAvailable();
     }
 
     /**
@@ -57,25 +57,23 @@ public class SyncAgentState {
      * @param newPerception
      */
     public synchronized void setPerceptions(String newPerception) {
-        this.perception = String.valueOf(newPerception);
-        this.perceptionAvailable = true;
+        this.perceptionManager.addLiteral(newPerception);
     }
 
     /**
      * Get the perceptions. (Agent side)
      * @return
      */
-    public synchronized String getPerceptions() {
+    public synchronized List<Literal> getPerceptions() {
         if (isPerceptionAvailable()) {
-            this.perceptionAvailable = false;
-            return this.perception;
+            return this.perceptionManager.getLiterals();
         } else {
             return null;
         }
     }
 
     public synchronized boolean isActionAvailable() {
-        return this.actionAvailable;
+        return this.actionManager.isLiteralAvailable();
     }
 
     /**
@@ -83,17 +81,15 @@ public class SyncAgentState {
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
-        this.action = String.valueOf(newAction);
-        this.actionAvailable = true;
+        this.actionManager.addLiteral(newAction);
     }
 
     /**
-     * Get the action that the agent has requested
+     * Get the next action that the agent has requested
      */
     public synchronized String getAction() {
         if (isActionAvailable()) {
-            this.actionAvailable = false;
-            return this.action;
+            return this.actionManager.getNextLiteral().toString();
         } else {
             return null;
         }

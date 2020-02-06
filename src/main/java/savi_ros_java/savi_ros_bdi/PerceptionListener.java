@@ -25,6 +25,7 @@ import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 
 import jason.asSyntax.*;
+import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 public class PerceptionListener implements Runnable {
 

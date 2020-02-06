@@ -3,12 +3,12 @@ package savi_ros_java.savi_ros_bdi;
 import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
+import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.io.*;
 import java.util.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
@@ -86,18 +86,10 @@ public class SaviAgent extends AgArch implements Runnable {
             sleep();       // Wait until there is a perception
         }
 
-        System.out.println("I made it past the delay loop.");
-        String receivedPerception = this.agentState.getPerceptions();
-        System.out.println("Agent received perception: ");
-        System.out.println(receivedPerception);
-        Literal perceptionLiteral = Literal.parseLiteral(receivedPerception);
-
-        // Update the history, get the list of literals to send to the agent
-        List<Literal> perceptionLiterals = new ArrayList<Literal>();
-        perceptionLiterals.add(perceptionLiteral);
-
-        System.out.println("Agent Perceiving perception ");
-        System.out.println(perceptionLiteral.toString());
+        // Get the list of literals to send to the agent
+        List<Literal> perceptionLiterals = this.agentState.getPerceptions();
+        System.out.println("Agent Perceiving: ");
+        System.out.println(perceptionLiterals.toString());
 
         return perceptionLiterals;
     }
@@ -206,6 +198,7 @@ public class SaviAgent extends AgArch implements Runnable {
             new TransitionSystem(ag, null, null, this);
             this.name = agentName;
 
+            System.out.println("ASL_PATH: " + aslPath);
             InputStream aslFile = new FileInputStream(aslPath);
             ag.initAg();
             ag.load(aslFile, agentType);
