@@ -1,4 +1,4 @@
-package savi_ros_java.savi_ros_bdi;
+package savi_ros_java.savi_ros_bdi.ros_connectors;
 
 import org.ros.concurrent.CancellableLoop;
 import org.ros.namespace.GraphName;
