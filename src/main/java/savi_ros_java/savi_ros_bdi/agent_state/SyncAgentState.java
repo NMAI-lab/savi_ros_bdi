@@ -25,7 +25,7 @@ public class SyncAgentState {
      * Method for accessing this singleton class
      * @return      Reference to the singleton object
      */
-    public static SyncAgentState getSyncAgentState() {
+    public synchronized SyncAgentState getSyncAgentState() {
         if (SyncAgentState.agentState == null) {
             SyncAgentState.agentState = new SyncAgentState();
 
@@ -88,7 +88,7 @@ public class SyncAgentState {
      * Get the next action that the agent has requested
      */
     public synchronized String getAction() {
-        if (isPerceptionAvailable()) {
+        if (isActionAvailable()) {
             return this.actionManager.getNextLiteral().toString();
         } else {
             return null;
