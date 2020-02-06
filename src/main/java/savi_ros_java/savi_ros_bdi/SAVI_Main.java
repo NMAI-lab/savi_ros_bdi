@@ -24,8 +24,6 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 
-import jason.asSyntax.*;
-
 /**
  * A simple {@link Subscriber} {@link NodeMain}.
  */

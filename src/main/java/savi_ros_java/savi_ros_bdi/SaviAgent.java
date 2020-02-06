@@ -3,12 +3,12 @@ package savi_ros_java.savi_ros_bdi;
 import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
+import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.io.*;
 import java.util.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
