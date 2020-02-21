@@ -1,11 +1,13 @@
 package savi_ros_java.savi_ros.bdi.agent_state;
 
+import jason.asSyntax.Literal;
 import junit.framework.TestCase;
 
 import org.junit.jupiter.api.Test;
+import savi_ros_java.savi_ros_bdi.agent_state.LiteralManager;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 
 public class TestSyncAgentState extends TestCase {
 
@@ -14,7 +16,37 @@ public class TestSyncAgentState extends TestCase {
 
         System.out.println("Starting the TestSyncAgentState testCase");
 
+        LiteralManager literalManager = new LiteralManager();
+        List<Literal> literals;
+
+        // Start with something simple
+        literalManager.addLiteral("test(case)");
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
+        // Add something with two literals and see what happens
+        literalManager.addLiteral("test(case) another(test)");
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
+        // Add something with two literals and see what happens
+        literalManager.addLiteral("test(case)testAnother(test, moreStuff)");
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
+        // Add something with numbers
+        literalManager.addLiteral("test(4)testAnother(-5, -6, -7)");
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
         SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+
+        // Add something with numbers and double brackets
+        literalManager.addLiteral("test(4)testAnother((-5), (-6), (-7))");
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
+        //SyncAgentState agentState = SyncAgentState.getSyncAgentState();
 
 
         System.out.println("Test complete");
