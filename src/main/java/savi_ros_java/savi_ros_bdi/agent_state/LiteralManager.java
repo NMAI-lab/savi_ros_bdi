@@ -46,20 +46,43 @@ public class LiteralManager {
             return;
         }
 
-        // Remove any spaces
-        literalString = literalString.replace(" ", "");
-
         // The literal will end with a ')', use the location of the next one to extract the next literal from
         // literalString. Add it to the queue
         int bracketSpot = literalString.indexOf(')');
-        String nextPerception = literalString.substring(0, bracketSpot + 1);
-        literals.add(Literal.parseLiteral(nextPerception));
+        String nextLiteral = literalString.substring(0, bracketSpot + 1);
+        literals.add(convertToLiteral(nextLiteral));
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
         this.addLiteral(newLiteralString);
     }
 
+
+    /**
+     * Convert a single literal in String form to an instance of the Literal class.
+     * Removes any spaces that should not be there, and addressed issues with brackets around negative numbers.
+     * @param   literalString
+     * @return  Literal
+     */
+    private Literal convertToLiteral(String literalString) {
+
+        // Remove any spaces
+        literalString = literalString.replace(" ", "");
+
+        // Deal with double brackets around negative numbers
+        // Find every instance of a negative number
+        String negativeCharacter = "-";
+        int index = literalString.indexOf(negativeCharacter);
+        while (index >= 0) {
+            index = literalString.indexOf(negativeCharacter, index + 1);
+
+            // Check if there is a bracket before the negative sign
+
+        }
+
+        // Make the literal and return
+        return Literal.parseLiteral(literalString);
+    }
 
     /**
      * Get a copy of the literal list and clear contents
