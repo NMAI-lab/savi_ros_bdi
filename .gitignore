@@ -1,10 +1,6 @@
-
 .idea/
-
 .gradle/
-
 gradlew.bat
-
 gradlew
 
 gradle/wrapper/gradle-wrapper.properties
@@ -12,3 +8,5 @@ gradle/wrapper/gradle-wrapper.properties
 gradle/wrapper/gradle-wrapper.jar
 
 out/
+
+build/
