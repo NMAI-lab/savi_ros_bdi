@@ -39,12 +39,21 @@ public class TestSyncAgentState extends TestCase {
         literals = literalManager.getLiterals();
         System.out.println(literals.toString());
 
-        SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-
         // Add something with numbers and double brackets
         literalManager.addLiteral("test(4)testAnother((-5), (-6), (-7))");
         literals = literalManager.getLiterals();
         System.out.println(literals.toString());
+
+        String angularVelocity = "angularVelocity(1,1,1,1)";
+        String linearAcceleration = "linearAcceleration(1,1,1,1)";
+        String orientation = "orientation(1,1,1,1,1)";
+        String perception = angularVelocity + " " + linearAcceleration + " " + orientation;
+
+        literalManager.addLiteral(perception);
+        literals = literalManager.getLiterals();
+        System.out.println(literals.toString());
+
+
 
         //SyncAgentState agentState = SyncAgentState.getSyncAgentState();
 
