@@ -46,11 +46,20 @@ public class LiteralManager {
             return;
         }
 
+        // Remove any spaces
+        literalString = literalString.replace(" ", "");
+
+        // Deal with double brackets around negative numbers
+        literalString = literalString.replace("((", "(");
+        literalString = literalString.replace("))", ")");
+        literalString = literalString.replace(",(", ",");
+        literalString = literalString.replace("),", ",");
+
         // The literal will end with a ')', use the location of the next one to extract the next literal from
         // literalString. Add it to the queue
         int bracketSpot = literalString.indexOf(')');
-        String nextPerception = literalString.substring(0, bracketSpot + 1);
-        literals.add(Literal.parseLiteral(nextPerception));
+        String nextLiteral = literalString.substring(0, bracketSpot + 1);
+        literals.add(Literal.parseLiteral(literalString));
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
