@@ -47,15 +47,18 @@ public class TestSyncAgentState extends TestCase {
         String angularVelocity = "angularVelocity(1,1,1,1)";
         String linearAcceleration = "linearAcceleration(1,1,1,1)";
         String orientation = "orientation(1,1,1,1,1)";
-        String perception = angularVelocity + " " + linearAcceleration + " " + orientation;
+        String perception = angularVelocity + linearAcceleration + orientation;
 
         literalManager.addLiteral(perception);
         literals = literalManager.getLiterals();
         System.out.println(literals.toString());
 
-
-
-        //SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+        SyncAgentState agentState = SyncAgentState.getSyncAgentState();
+        assertFalse("Checking that empty agentState has no perception available", agentState.isPerceptionAvailable());
+        agentState.setPerceptions(perception);
+        assertTrue("Checking that agentState has perception available after adding", agentState.isPerceptionAvailable());
+        List<Literal> perceptionsList = agentState.getPerceptions();
+        System.out.println(perceptionsList.toString());
 
 
         System.out.println("Test complete");
