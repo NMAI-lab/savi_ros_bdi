@@ -46,11 +46,15 @@ public class PerceptionListener implements Runnable {
             @Override
             public void onNewMessage(std_msgs.String message) {
                 // Interpret the message as a literal
-                Literal rxLiteral = Literal.parseLiteral(message.getData());
+                //Literal rxLiteral = Literal.parseLiteral(message.getData());
 
                 // Handle the message
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-                agentState.setPerceptions(rxLiteral.toString());
+                //agentState.setPerceptions(rxLiteral.toString());
+                agentState.setPerceptions(message.getData());
+
+                log.info("Received: " + message.getData());
+
             }
         });
     }
