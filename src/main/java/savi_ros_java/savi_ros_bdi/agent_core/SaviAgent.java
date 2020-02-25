@@ -150,6 +150,45 @@ public class SaviAgent extends AgArch implements Runnable {
     }
 
     /**
+     * Send message to another agent (via simulated wifi).
+     */
+    @Override
+    public void sendMsg(Message m) throws Exception {
+        // Make sure sender parameter is set
+        if (m.getSender() == null)  m.setSender(getAgName());
+
+        // Put the message in the wifi queue
+        this.agentState.addToOutbox(m.toString());
+    }
+
+    /**
+     * in case agent is sleeping
+     * TODO: in case we get problems of agents not waking up on messages, this is what to use!!
+     * */
+    public void wakeAgent() {
+        wakeUpSense();
+    }
+
+    @Override
+    public void broadcast(Message m) throws Exception {
+        m.setReceiver(broadcastID);
+        this.sendMsg(m);
+    }
+
+    @Override
+    public void checkMail() {
+        Circumstance circ = getTS().getC();
+        List<Message> messages = this.agentState.getInbox();
+        if (messages.isEmpty())
+            return;
+        for (Message currentMessage:messages) {
+            if (currentMessage.getReceiver().equals(broadcastID) || currentMessage.getReceiver().equals(this.getAgName())) {
+                circ.addMsg(currentMessage);
+            }
+        }
+    }
+
+    /**
      * Load the properties of the agent from the configuration file
      * @return
      */
