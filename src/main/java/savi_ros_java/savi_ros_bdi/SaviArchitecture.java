@@ -3,7 +3,6 @@
 package savi_ros_java.savi_ros_bdi;
 
 import org.apache.commons.logging.Log;
-import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
 import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
@@ -11,6 +10,8 @@ import org.ros.node.NodeMain;
 import org.ros.node.topic.Subscriber;
 import savi_ros_java.savi_ros_bdi.agent_core.SaviAgent;
 import savi_ros_java.savi_ros_bdi.ros_connectors.ActionTalker;
+import savi_ros_java.savi_ros_bdi.ros_connectors.MessageListener;
+import savi_ros_java.savi_ros_bdi.ros_connectors.MessageTalker;
 import savi_ros_java.savi_ros_bdi.ros_connectors.PerceptionListener;
 
 /**
@@ -24,6 +25,8 @@ public class SaviArchitecture {
     private SaviAgent theAgent;
     private ActionTalker actionTalker;
     private PerceptionListener perceptionListener;
+    private MessageTalker messageTalker;
+    private MessageListener messageListener;
 
     /**
      * Need a connectedNode, can't have default constructor
@@ -38,14 +41,13 @@ public class SaviArchitecture {
      */
     public SaviArchitecture(final ConnectedNode connectedNode) {
         // Build the agent
-        //this.theAgent = new SaviAgent("0", "demo");
         this.theAgent = new SaviAgent();
 
-        // Setup the action talker, for replying with actions at the end of the reasoning cycle
-        this.actionTalker = new ActionTalker(connectedNode);
-
-        // Setup the perception listener, responsible for listenening for perceptions and passing them to the agent
+        // Setup the nodes for communicating perceptions, actions and messages to and from ROS
         this.perceptionListener = new PerceptionListener(connectedNode);
+        this.actionTalker = new ActionTalker(connectedNode);
+        this.messageListener = new MessageListener(connectedNode);
+        this.messageTalker = new MessageTalker(connectedNode);
     }
 
     /**
