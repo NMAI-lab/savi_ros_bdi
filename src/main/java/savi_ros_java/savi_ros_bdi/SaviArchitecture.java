@@ -1,13 +1,6 @@
-//package com.github.savi_ros_java.savi_ros_bdi;
-
 package savi_ros_java.savi_ros_bdi;
 
-import org.apache.commons.logging.Log;
-import org.ros.namespace.GraphName;
-import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
-import org.ros.node.NodeMain;
-import org.ros.node.topic.Subscriber;
 import savi_ros_java.savi_ros_bdi.agent_core.SaviAgent;
 import savi_ros_java.savi_ros_bdi.ros_connectors.ActionTalker;
 import savi_ros_java.savi_ros_bdi.ros_connectors.MessageListener;

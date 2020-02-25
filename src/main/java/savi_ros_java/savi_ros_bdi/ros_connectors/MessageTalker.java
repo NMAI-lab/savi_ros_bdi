@@ -1,11 +1,8 @@
 package savi_ros_java.savi_ros_bdi.ros_connectors;
 
-import org.apache.commons.logging.Log;
 import org.ros.concurrent.CancellableLoop;
-import org.ros.message.MessageListener;
 import org.ros.node.ConnectedNode;
 import org.ros.node.topic.Publisher;
-import org.ros.node.topic.Subscriber;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 import std_msgs.String;
 
