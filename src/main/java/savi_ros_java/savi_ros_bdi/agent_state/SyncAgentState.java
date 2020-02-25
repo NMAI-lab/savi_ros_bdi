@@ -49,7 +49,7 @@ public class SyncAgentState {
      * @return
      */
     public synchronized boolean isPerceptionAvailable() {
-        return this.perceptionManager.isLiteralAvailable();
+        return this.perceptionManager.isItemAvailable();
     }
 
     /**
@@ -57,7 +57,7 @@ public class SyncAgentState {
      * @param newPerception
      */
     public synchronized void setPerceptions(String newPerception) {
-        this.perceptionManager.addLiteral(newPerception);
+        this.perceptionManager.addItem(newPerception);
     }
 
     /**
@@ -66,14 +66,14 @@ public class SyncAgentState {
      */
     public synchronized List<Literal> getPerceptions() {
         if (isPerceptionAvailable()) {
-            return this.perceptionManager.getLiterals();
+            return this.perceptionManager.getItemList();
         } else {
             return null;
         }
     }
 
     public synchronized boolean isActionAvailable() {
-        return this.actionManager.isLiteralAvailable();
+        return this.actionManager.isItemAvailable();
     }
 
     /**
@@ -81,7 +81,7 @@ public class SyncAgentState {
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
-        this.actionManager.addLiteral(newAction);
+        this.actionManager.addItem(newAction);
     }
 
     /**
@@ -89,7 +89,7 @@ public class SyncAgentState {
      */
     public synchronized String getAction() {
         if (isActionAvailable()) {
-            return this.actionManager.getNextLiteral().toString();
+            return this.actionManager.getNextItem().toString();
         } else {
             return null;
         }
