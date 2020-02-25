@@ -13,6 +13,8 @@ public class ActionTalker implements Runnable {
     // The node for passing messages to
     private ConnectedNode connectedNode;
 
+    private Publisher<std_msgs.String> publisher;
+
     /**
      * Default constructor - don't use
      */
@@ -27,6 +29,9 @@ public class ActionTalker implements Runnable {
     public ActionTalker(final ConnectedNode connectedNode) {
         // Set the connectedNode parameter
         this.connectedNode = connectedNode;
+
+        // Setup the publisher
+        this.publisher = connectedNode.newPublisher("actions", std_msgs.String._TYPE);
     }
 
     /**
@@ -35,8 +40,6 @@ public class ActionTalker implements Runnable {
      * Based on the Talker.java tutorial from ROS.
      */
     public void run() {
-        // Setup the publisher
-        final Publisher<std_msgs.String> publisher = connectedNode.newPublisher("actions", std_msgs.String._TYPE);
 
         // This CancellableLoop will be canceled automatically when the node shuts down.
         connectedNode.executeCancellableLoop(new CancellableLoop() {

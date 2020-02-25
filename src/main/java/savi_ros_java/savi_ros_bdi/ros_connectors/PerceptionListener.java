@@ -31,26 +31,25 @@ public class PerceptionListener implements Runnable {
 
     // The node for passing messages to
     private ConnectedNode connectedNode;
+    private Log log;
+    private Subscriber<std_msgs.String> subscriber;
 
     private PerceptionListener() { }
 
     public PerceptionListener(final ConnectedNode connectedNode) {
         // Set the connectedNode parameter
         this.connectedNode = connectedNode;
+
+        log = connectedNode.getLog();
+        subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
     }
 
     public void run() {
-        final Log log = connectedNode.getLog();
-        Subscriber<std_msgs.String> subscriber = connectedNode.newSubscriber("perceptions", std_msgs.String._TYPE);
         subscriber.addMessageListener(new MessageListener<std_msgs.String>() {
             @Override
             public void onNewMessage(std_msgs.String message) {
-                // Interpret the message as a literal
-                //Literal rxLiteral = Literal.parseLiteral(message.getData());
-
                 // Handle the message
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-                //agentState.setPerceptions(rxLiteral.toString());
                 agentState.setPerceptions(message.getData());
 
                 log.info("Received: " + message.getData());
