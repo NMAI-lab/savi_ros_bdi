@@ -177,13 +177,13 @@ public class SaviAgent extends AgArch implements Runnable {
 
     @Override
     public void checkMail() {
-        Circumstance circ = getTS().getC();
-        List<Message> messages = this.agentState.getInbox();
-        if (messages.isEmpty())
-            return;
-        for (Message currentMessage:messages) {
-            if (currentMessage.getReceiver().equals(broadcastID) || currentMessage.getReceiver().equals(this.getAgName())) {
-                circ.addMsg(currentMessage);
+        if (agentState.checkInboxMailAvailable()) {
+            Circumstance circ = getTS().getC();
+            List<Message> messages = this.agentState.getInbox();
+            for (Message currentMessage:messages) {
+                if (currentMessage.getReceiver().equals(broadcastID) || currentMessage.getReceiver().equals(this.getAgName())) {
+                    circ.addMsg(currentMessage);
+                }
             }
         }
     }
