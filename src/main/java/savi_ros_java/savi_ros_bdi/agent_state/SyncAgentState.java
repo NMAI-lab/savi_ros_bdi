@@ -1,6 +1,7 @@
 package savi_ros_java.savi_ros_bdi.agent_state;
 
 import jason.asSyntax.Literal;
+import jason.asSemantics.Message;
 
 import java.util.List;
 
@@ -15,8 +16,10 @@ import java.util.List;
 public class SyncAgentState {
 
     // Location for the perceptions and actions to be stored.
-    private LiteralManager perceptionManager;
-    private LiteralManager actionManager;
+    private LiteralManager perceptions;
+    private LiteralManager actions;
+    private MessageManager inbox;
+    private MessageManager outbox;
 
     // Static instance of this singleton class
     private static SyncAgentState agentState;
@@ -39,8 +42,10 @@ public class SyncAgentState {
      *  This is a private constructor as this is a singleton class.
      */
     private SyncAgentState() {
-        this.actionManager = new LiteralManager();
-        this.perceptionManager = new LiteralManager();
+        this.actions = new LiteralManager();
+        this.perceptions = new LiteralManager();
+        this.inbox = new MessageManager();
+        this.outbox = new MessageManager();
     }
 
 
@@ -49,7 +54,7 @@ public class SyncAgentState {
      * @return
      */
     public synchronized boolean isPerceptionAvailable() {
-        return this.perceptionManager.isLiteralAvailable();
+        return this.perceptions.isItemAvailable();
     }
 
     /**
@@ -57,7 +62,7 @@ public class SyncAgentState {
      * @param newPerception
      */
     public synchronized void setPerceptions(String newPerception) {
-        this.perceptionManager.addLiteral(newPerception);
+        this.perceptions.addItem(newPerception);
     }
 
     /**
@@ -66,14 +71,14 @@ public class SyncAgentState {
      */
     public synchronized List<Literal> getPerceptions() {
         if (isPerceptionAvailable()) {
-            return this.perceptionManager.getLiterals();
+            return this.perceptions.getItemList();
         } else {
             return null;
         }
     }
 
     public synchronized boolean isActionAvailable() {
-        return this.actionManager.isLiteralAvailable();
+        return this.actions.isItemAvailable();
     }
 
     /**
@@ -81,7 +86,7 @@ public class SyncAgentState {
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
-        this.actionManager.addLiteral(newAction);
+        this.actions.addItem(newAction);
     }
 
     /**
@@ -89,7 +94,59 @@ public class SyncAgentState {
      */
     public synchronized String getAction() {
         if (isActionAvailable()) {
-            return this.actionManager.getNextLiteral().toString();
+            return this.actions.getNextItem().toString();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Check if there is a fresh messages.
+     * @return
+     */
+    public synchronized boolean checkInboxMailAvailable() {
+        return this.inbox.isItemAvailable();
+    }
+
+    /**
+     * Set the perceptions, as received from the sensors (environment side)
+     * @param newMail
+     */
+    public synchronized void addToInbox(String newMail) {
+        this.inbox.addItem(newMail);
+    }
+
+    /**
+     * Get the perceptions. (agent_core side)
+     * @return
+     */
+    public synchronized List<Message> getInbox() {
+        if (checkInboxMailAvailable()) {
+            return this.inbox.getItemList();
+        } else {
+            return null;
+        }
+    }
+
+
+    public synchronized boolean checkOutboxMailAvailable() {
+        return this.outbox.isItemAvailable();
+    }
+
+    /**
+     * Provide the action the agent wants to execute (agent_core side)
+     * @param newMail
+     */
+    public synchronized void addToOutbox(String newMail) {
+        this.outbox.addItem(newMail);
+    }
+
+    /**
+     * Get the next action that the agent has requested
+     */
+    public synchronized String getOutboxMessage() {
+        if (checkOutboxMailAvailable()) {
+            return this.outbox.getNextItem().toString();
         } else {
             return null;
         }
