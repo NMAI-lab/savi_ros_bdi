@@ -59,6 +59,14 @@ public class SaviArchitecture {
         // Run the perception listening thread
         Thread perceptionListeningThread = new Thread(this.perceptionListener);
         perceptionListeningThread.start();
+
+        // Run the outbox talking thread
+        Thread messageTalkerThread = new Thread(this.messageTalker);
+        messageTalkerThread.start();
+
+        // Run the inbox listener thread
+        Thread messageListenerThread = new Thread(this.messageListener);
+        messageListenerThread.start();
     }
 
     /**
