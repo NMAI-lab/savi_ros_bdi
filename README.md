@@ -65,7 +65,7 @@ In a seperate terminal window, run the savi_ros_java.savi_ros_bdi.SAVI_Main proc
 ```
 $ source devel/setup.bash
 $ cd ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin
-- ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
+$ ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
 ```
 The process will subscribe to the perceptions topic and publish to the actions topic.
 
