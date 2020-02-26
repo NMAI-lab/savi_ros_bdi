@@ -121,7 +121,7 @@ public class SyncAgentState {
      * @return
      */
     public synchronized List<Message> getInbox() {
-        if (isPerceptionAvailable()) {
+        if (checkInboxMailAvailable()) {
             return this.inbox.getItemList();
         } else {
             return null;
@@ -145,7 +145,7 @@ public class SyncAgentState {
      * Get the next action that the agent has requested
      */
     public synchronized String getOutboxMessage() {
-        if (isActionAvailable()) {
+        if (checkOutboxMailAvailable()) {
             return this.outbox.getNextItem().toString();
         } else {
             return null;

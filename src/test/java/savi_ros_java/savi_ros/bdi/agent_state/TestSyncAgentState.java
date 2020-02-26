@@ -1,5 +1,6 @@
 package savi_ros_java.savi_ros.bdi.agent_state;
 
+import jason.asSemantics.Message;
 import jason.asSyntax.Literal;
 import junit.framework.TestCase;
 
@@ -59,6 +60,12 @@ public class TestSyncAgentState extends TestCase {
         assertTrue("Checking that agentState has perception available after adding", agentState.isPerceptionAvailable());
         List<Literal> perceptionsList = agentState.getPerceptions();
         System.out.println(perceptionsList.toString());
+
+        assertFalse("Checking that empty agentState has no inbox message available", agentState.checkInboxMailAvailable());
+        agentState.addToInbox("<1582740868.91,2,tell,0,anotherTime(1582740868.91)>");
+        assertTrue("Checking that agentState has inbox available after adding", agentState.checkInboxMailAvailable());
+        List<Message> messageList = agentState.getInbox();
+        System.out.println(messageList.toString());
 
 
         System.out.println("Test complete");

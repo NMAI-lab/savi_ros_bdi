@@ -40,8 +40,9 @@ public class MessageManager<Message> extends ItemManager {
     public boolean validateItemString(String literalString) {
         int openBracketSpot = literalString.indexOf('<');
         int closeBracketSpot = literalString.indexOf('>');
+        int length = literalString.length();
 
-        if ((openBracketSpot <= 0) || (closeBracketSpot <= 0)) {
+        if ((openBracketSpot != 0) || ((closeBracketSpot + 1) != length)) {
             return false;
         } else if (openBracketSpot < closeBracketSpot) {
             return true;
