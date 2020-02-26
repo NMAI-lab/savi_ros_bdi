@@ -43,7 +43,7 @@ public class MessageTalker implements Runnable {
         connectedNode.executeCancellableLoop(new CancellableLoop() {
             protected void loop() throws InterruptedException {
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-                if (agentState.isActionAvailable()) {               // Check for an action
+                if (agentState.checkOutboxMailAvailable()) {        // Check for an message
                     java.lang.String message = java.lang.String.valueOf(agentState.getOutboxMessage());   // Get the message
                     System.out.println("Sending outbox message: " + message);
                     std_msgs.String str = publisher.newMessage();   // Build a new message
