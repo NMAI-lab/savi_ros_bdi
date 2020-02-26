@@ -130,7 +130,6 @@ public class SyncAgentState {
 
 
     public synchronized boolean checkOutboxMailAvailable() {
-        System.out.println("Checking if there is mail for the outbox!!!!!!!!!!!!!");
         return this.outbox.isItemAvailable();
     }
 
@@ -146,9 +145,7 @@ public class SyncAgentState {
      * Get the next action that the agent has requested
      */
     public synchronized String getOutboxMessage() {
-        System.out.println("I'm in the getOutboxMessage method!!!!!!!!!!!");
         if (checkOutboxMailAvailable()) {
-            System.out.println("Returning mail !!!!!!");
             return this.outbox.getNextItem().toString();
         } else {
             return null;
