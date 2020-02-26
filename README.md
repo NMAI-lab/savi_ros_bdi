@@ -67,7 +67,7 @@ $ source devel/setup.bash
 $ cd ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin
 $ ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
 ```
-The process will subscribe to the perceptions topic and publish to the actions topic.
+The process will subscribe to the perceptions and inbox topics and publish to the actions and outbox topics.
 
 ## Example useage
 An example of how to use this package is available at https://github.com/NMAI-lab/savi_ros_demo. At that page you will find a sample BDI program written for Jason using AgentSpeak as well as a Python script which generates example perceptions for an agent to perceive. Another Python script listens for actions that the agent wants to execute.
