@@ -42,6 +42,7 @@ public class MessageTalker implements Runnable {
         // This CancellableLoop will be canceled automatically when the node shuts down.
         connectedNode.executeCancellableLoop(new CancellableLoop() {
             protected void loop() throws InterruptedException {
+                System.out.println("I'm in the message sending loop!!!!!!!!!!");
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
                 if (agentState.checkOutboxMailAvailable()) {        // Check for an message
                     java.lang.String message = java.lang.String.valueOf(agentState.getOutboxMessage());   // Get the message

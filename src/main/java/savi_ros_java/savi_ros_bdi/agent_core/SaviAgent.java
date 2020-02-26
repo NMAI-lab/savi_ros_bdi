@@ -154,20 +154,11 @@ public class SaviAgent extends AgArch implements Runnable {
      */
     @Override
     public void sendMsg(Message m) throws Exception {
-        System.out.println("I'm broadcasting!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(m.toString());
-
         // Make sure sender parameter is set
         if (m.getSender() == null)  m.setSender(getAgName());
 
-        System.out.println("Made it past sender check!!!!!!!!!!!!!!!!!!!");
-
         // Put the message in the wifi queue
         this.agentState.addToOutbox(m.toString());
-
-        System.out.println("Made it past add to outbox!!!!!!!!!!!!!!!!!!!");
-
-
     }
 
     /**
