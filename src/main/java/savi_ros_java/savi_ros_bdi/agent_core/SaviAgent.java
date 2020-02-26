@@ -171,6 +171,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
     @Override
     public void broadcast(Message m) throws Exception {
+        System.out.println("I'm broadcasting!!!!!!!!!!!!!!!!!!!!");
         m.setReceiver(broadcastID);
         this.sendMsg(m);
     }
