@@ -61,7 +61,11 @@ $ source devel/setup.bash
 $ roscore
 ```
 In a seperate terminal window, run the savi_ros_java.savi_ros_bdi.SAVI_Main process:
-
+```
+$ source devel/setup.bash
+$ rosrun savi_ros_java savi_ros_bdi savi_s_java.savi_ros_bdi.SAVI_Main
+```
+In the event that the rosrun method does not work, the project can be launched maunally using the following:
 ```
 $ source devel/setup.bash
 $ cd ~/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/savi_ros_bdi/build/install/savi_ros_bdi/bin
