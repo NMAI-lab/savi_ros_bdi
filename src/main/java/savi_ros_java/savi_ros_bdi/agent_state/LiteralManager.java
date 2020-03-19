@@ -28,6 +28,7 @@ public class LiteralManager<Literal> extends ItemManager {
         // Deal with double brackets around negative numbers
         literalString = literalString.replace("((", "(");
         literalString = literalString.replace("))", ")");
+        literalString = literalString.replace("),(", ",");
         literalString = literalString.replace(",(", ",");
         literalString = literalString.replace("),", ",");
 
