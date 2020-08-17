@@ -103,8 +103,10 @@ public class SaviAgent extends AgArch implements Runnable {
         Structure actionTerm = action.getActionTerm();
         String actionString = actionTerm.toString();
 
-        // Add the action to agentState
-        agentState.addAction(actionString);
+        // Add the action to agentState if it is longer than 0 characters
+        if (actionString.length() > 0) {
+            agentState.addAction(actionString);
+        }
 
         // Set that the execution was OK and flag it as complete.
         action.setResult(true);

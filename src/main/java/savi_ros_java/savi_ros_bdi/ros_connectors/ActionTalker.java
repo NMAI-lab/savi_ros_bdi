@@ -47,10 +47,12 @@ public class ActionTalker implements Runnable {
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
                 if (agentState.isActionAvailable()) {                  // Check for an action
                     String action = String.valueOf(agentState.getAction());   // Get the action
-                    System.out.println("Sending action message: " + action);
-                    std_msgs.String str = publisher.newMessage();           // Build a new message
-                    str.setData(action);                                    // Set the action as the message
-                    publisher.publish(str);                                 // Send the message
+                    if (action.length() > 0) {                                      // Only send the message if there is something to send.
+                        System.out.println("Sending action message: " + action);
+                        std_msgs.String str = publisher.newMessage();           // Build a new message
+                        str.setData(action);                                    // Set the action as the message
+                        publisher.publish(str);                                 // Send the message
+                    }
                 }
             }
         });

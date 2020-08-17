@@ -43,6 +43,8 @@ public class LiteralManager<Literal> extends ItemManager {
         this.addItem(newLiteralString);
     }
 
+
+
     /**
      * This tests the location of the brackets to see if they make sense for a real literal
      * @return True if this contains something that looks like a literal

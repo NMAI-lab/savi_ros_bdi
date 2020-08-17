@@ -67,6 +67,13 @@ public class TestSyncAgentState extends TestCase {
         List<Message> messageList = agentState.getInbox();
         System.out.println(messageList.toString());
 
+        // Test case with batteryOK perception (no brackets scenario)
+        agentState.setPerceptions("battery(OK)");
+        assertTrue("Checking that agentState has perception available after adding", agentState.isPerceptionAvailable());
+        perceptionsList = agentState.getPerceptions();
+        System.out.println(perceptionsList.toString());
+
+
 
         System.out.println("Test complete");
     }

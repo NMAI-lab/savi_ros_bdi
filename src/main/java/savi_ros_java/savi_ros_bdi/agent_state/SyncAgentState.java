@@ -86,7 +86,9 @@ public class SyncAgentState {
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
-        this.actions.addItem(newAction);
+        if (newAction.length() > 0) {
+            this.actions.addItem(newAction);
+        }
     }
 
     /**
