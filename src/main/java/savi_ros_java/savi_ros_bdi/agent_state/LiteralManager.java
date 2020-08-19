@@ -19,7 +19,7 @@ public class LiteralManager<Literal> extends ItemManager {
 
         // Check to see if anything in this string looks like a literal
         if (!validateItemString(literalString)) {
-            // node.getLog.error("error message");      // TODO: Use logger error messages for this.
+            // node.getLog.error("error message");      // TODO: Use logger error messages for this. http://rosjava.github.io/rosjava_core/hydro/getting_started.html#logging
             System.out.println("ERROR: literal Validation:" + literalString);
             return;
         }
