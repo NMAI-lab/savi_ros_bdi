@@ -19,6 +19,7 @@ public class LiteralManager<Literal> extends ItemManager {
 
         // Check to see if anything in this string looks like a literal
         if (!validateItemString(literalString)) {
+            // node.getLog.error("error message");      // TODO: Use logger error messages for this.
             System.out.println("ERROR: literal Validation:" + literalString);
             return;
         }
