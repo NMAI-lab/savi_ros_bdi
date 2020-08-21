@@ -2,13 +2,17 @@ package savi_ros_java.savi_ros_bdi.agent_core;
 
 import jason.architecture.AgArch;
 import jason.asSemantics.*;
-import jason.asSyntax.*;
+import jason.asSyntax.Literal;
+import jason.asSyntax.Structure;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
@@ -53,7 +57,10 @@ public class SaviAgent extends AgArch implements Runnable {
             while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
                 System.out.println("agent_core is reasoning....");
+                long reasoningStartTime = System.currentTimeMillis();
                 getTS().reasoningCycle();
+                Long elapsed = new Long(System.currentTimeMillis() - reasoningStartTime);
+                this.agentState.addPerformanceMeasure(elapsed.toString());
 
                 if (getTS().canSleep()) {
                     sleep();

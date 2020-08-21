@@ -2,10 +2,7 @@ package savi_ros_java.savi_ros_bdi;
 
 import org.ros.node.ConnectedNode;
 import savi_ros_java.savi_ros_bdi.agent_core.SaviAgent;
-import savi_ros_java.savi_ros_bdi.ros_connectors.ActionTalker;
-import savi_ros_java.savi_ros_bdi.ros_connectors.MessageListener;
-import savi_ros_java.savi_ros_bdi.ros_connectors.MessageTalker;
-import savi_ros_java.savi_ros_bdi.ros_connectors.PerceptionListener;
+import savi_ros_java.savi_ros_bdi.ros_connectors.*;
 
 /**
  * Based upon a class found in SAVI: https://github.com/NMAI-lab/SAVI
@@ -20,6 +17,7 @@ public class SaviArchitecture {
     private PerceptionListener perceptionListener;
     private MessageTalker messageTalker;
     private MessageListener messageListener;
+    private PerformanceTalker performanceTalker;
 
     /**
      * Need a connectedNode, can't have default constructor
@@ -41,6 +39,7 @@ public class SaviArchitecture {
         this.actionTalker = new ActionTalker(connectedNode);
         this.messageListener = new MessageListener(connectedNode);
         this.messageTalker = new MessageTalker(connectedNode);
+        this.performanceTalker = new PerformanceTalker(connectedNode);
     }
 
     /**
@@ -56,13 +55,17 @@ public class SaviArchitecture {
         Thread actionTalkingThread = new Thread(this.actionTalker);
         actionTalkingThread.start();
 
-        // Run the perception listening thread
-        Thread perceptionListeningThread = new Thread(this.perceptionListener);
-        perceptionListeningThread.start();
-
         // Run the outbox talking thread
         Thread messageTalkerThread = new Thread(this.messageTalker);
         messageTalkerThread.start();
+
+        // Run the performance measurement thread
+        Thread performanceTalkingThread = new Thread(this.performanceTalker);
+        performanceTalkingThread.start();
+
+        // Run the perception listening thread
+        Thread perceptionListeningThread = new Thread(this.perceptionListener);
+        perceptionListeningThread.start();
 
         // Run the inbox listener thread
         Thread messageListenerThread = new Thread(this.messageListener);
