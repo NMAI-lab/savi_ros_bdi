@@ -34,7 +34,7 @@ public class MessageTalker implements Runnable {
 
     /**
      * The run process for the MessageTalker
-     * It checks if there is an action and sends it to ROS.
+     * It checks if there is a message and sends it to ROS.
      * Based on the Talker.java tutorial from ROS.
      */
     public void run() {
