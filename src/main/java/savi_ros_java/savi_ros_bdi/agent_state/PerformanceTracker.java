@@ -16,7 +16,7 @@ public class PerformanceTracker<String> extends ItemManager {
         }
 
         // Add to the queue
-        this.addItem(itemString);
+        items.add(itemString);
 
     }
 

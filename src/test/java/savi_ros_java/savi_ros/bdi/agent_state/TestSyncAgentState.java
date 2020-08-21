@@ -3,12 +3,13 @@ package savi_ros_java.savi_ros.bdi.agent_state;
 import jason.asSemantics.Message;
 import jason.asSyntax.Literal;
 import junit.framework.TestCase;
-
 import org.junit.jupiter.api.Test;
 import savi_ros_java.savi_ros_bdi.agent_state.LiteralManager;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.util.List;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class TestSyncAgentState extends TestCase {
 
@@ -68,12 +69,23 @@ public class TestSyncAgentState extends TestCase {
         System.out.println(messageList.toString());
 
         // Test case with batteryOK perception (no brackets scenario)
-        agentState.setPerceptions("battery(OK)");
+        agentState.setPerceptions("battery(ok)");
         assertTrue("Checking that agentState has perception available after adding", agentState.isPerceptionAvailable());
         perceptionsList = agentState.getPerceptions();
         System.out.println(perceptionsList.toString());
 
-
+        // Test performance measure
+        long reasoningStartTime = System.currentTimeMillis();
+        try {
+            SECONDS.sleep(1);     // Waste some time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Long elapsed = new Long(System.currentTimeMillis() - reasoningStartTime);
+        agentState.addPerformanceMeasure(elapsed.toString());
+        String performanceMeasure = agentState.getPerformanceMeasure();
+        assertTrue("Performance measure test", performanceMeasure != null);
+        System.out.println("Performance measure result: " + performanceMeasure);
 
         System.out.println("Test complete");
     }

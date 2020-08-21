@@ -7,8 +7,6 @@
 
 package savi_ros_java.savi_ros_bdi.agent_state;
 
-import jason.asSyntax.Literal;
-
 public class LiteralManager<Literal> extends ItemManager {
 
     /**
@@ -42,7 +40,9 @@ public class LiteralManager<Literal> extends ItemManager {
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
-        this.addItem(newLiteralString);
+        if (newLiteralString.length() > 0) {
+            this.addItem(newLiteralString);
+        }
     }
 
 

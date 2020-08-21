@@ -47,6 +47,7 @@ public class SyncAgentState {
         this.perceptions = new LiteralManager();
         this.inbox = new MessageManager();
         this.outbox = new MessageManager();
+        this.performanceTracker = new PerformanceTracker();
     }
 
 
