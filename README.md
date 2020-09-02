@@ -73,8 +73,8 @@ $ ./savi_ros_bdi savi_ros_java.savi_ros_bdi.SAVI_Main
 ```
 The process will subscribe to the perceptions and inbox topics and publish to the actions and outbox topics.
 
-## Example useage
+## Example usage
 An example of how to use this package is available at https://github.com/NMAI-lab/savi_ros_demo. At that page you will find a sample BDI program written for Jason using AgentSpeak as well as a Python script which generates example perceptions for an agent to perceive. Another Python script listens for actions that the agent wants to execute.
 
-## Compatability
+## Compatibility
 This application has been successfully run using ROS Kinetic and Melodic. It has also been demonstrated using Raspian on both the Raspberry Pi 3 and 4, as well as on desktop computers running Ubuntu and Windows.
