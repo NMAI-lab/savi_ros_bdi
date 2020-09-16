@@ -6,7 +6,7 @@ import org.ros.node.topic.Publisher;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 import std_msgs.String;
 
-public class MessageTalker implements Runnable {
+public class PerformanceTalker implements Runnable {
 
     // The node for passing messages to
     private ConnectedNode connectedNode;
@@ -16,25 +16,25 @@ public class MessageTalker implements Runnable {
     /**
      * Default constructor - don't use
      */
-    private MessageTalker() {
+    private PerformanceTalker() {
     }
 
     /**
      * Constructor
      *
-     * @param connectedNode Connection to the ROS node for messages
+     * @param connectedNode Connection to the ROS node for performance measurements
      */
-    public MessageTalker(final ConnectedNode connectedNode) {
+    public PerformanceTalker(final ConnectedNode connectedNode) {
         // Set the connectedNode parameter
         this.connectedNode = connectedNode;
 
         // Setup the publisher
-        this.publisher = connectedNode.newPublisher("outbox", std_msgs.String._TYPE);
+        this.publisher = connectedNode.newPublisher("reasoningPerformance", std_msgs.String._TYPE);
     }
 
     /**
-     * The run process for the MessageTalker
-     * It checks if there is a message and sends it to ROS.
+     * The run process for the PerformanceTalker
+     * It checks if there is a performance measurement and sends it to ROS.
      * Based on the Talker.java tutorial from ROS.
      */
     public void run() {
@@ -43,9 +43,9 @@ public class MessageTalker implements Runnable {
         connectedNode.executeCancellableLoop(new CancellableLoop() {
             protected void loop() throws InterruptedException {
                 SyncAgentState agentState = SyncAgentState.getSyncAgentState();
-                if (agentState.checkOutboxMailAvailable()) {        // Check for an message
-                    java.lang.String message = java.lang.String.valueOf(agentState.getOutboxMessage());   // Get the message
-                    System.out.println("Sending outbox message: " + message);
+                if (agentState.checkPerformanceMeasureAvailable()) {        // Check for an message
+                    java.lang.String message = java.lang.String.valueOf(agentState.getPerformanceMeasure());   // Get the measurement
+                    System.out.println("Sending performance message: " + message);
                     std_msgs.String str = publisher.newMessage();   // Build a new message
                     str.setData(message);                           // Set the action as the message
                     publisher.publish(str);                         // Send the message

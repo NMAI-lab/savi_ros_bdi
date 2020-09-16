@@ -7,8 +7,6 @@
 
 package savi_ros_java.savi_ros_bdi.agent_state;
 
-import jason.asSyntax.Literal;
-
 public class LiteralManager<Literal> extends ItemManager {
 
     /**
@@ -19,6 +17,8 @@ public class LiteralManager<Literal> extends ItemManager {
 
         // Check to see if anything in this string looks like a literal
         if (!validateItemString(literalString)) {
+            // node.getLog.error("error message");      // TODO: Use logger error messages for this. http://rosjava.github.io/rosjava_core/hydro/getting_started.html#logging
+            System.out.println("ERROR: literal Validation:" + literalString);
             return;
         }
 
@@ -28,6 +28,7 @@ public class LiteralManager<Literal> extends ItemManager {
         // Deal with double brackets around negative numbers
         literalString = literalString.replace("((", "(");
         literalString = literalString.replace("))", ")");
+        literalString = literalString.replace("),(", ",");
         literalString = literalString.replace(",(", ",");
         literalString = literalString.replace("),", ",");
 
@@ -39,8 +40,12 @@ public class LiteralManager<Literal> extends ItemManager {
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
-        this.addItem(newLiteralString);
+        if (newLiteralString.length() > 0) {
+            this.addItem(newLiteralString);
+        }
     }
+
+
 
     /**
      * This tests the location of the brackets to see if they make sense for a real literal

@@ -20,6 +20,7 @@ public class SyncAgentState {
     private LiteralManager actions;
     private MessageManager inbox;
     private MessageManager outbox;
+    private PerformanceTracker performanceTracker;
 
     // Static instance of this singleton class
     private static SyncAgentState agentState;
@@ -46,6 +47,7 @@ public class SyncAgentState {
         this.perceptions = new LiteralManager();
         this.inbox = new MessageManager();
         this.outbox = new MessageManager();
+        this.performanceTracker = new PerformanceTracker();
     }
 
 
@@ -86,7 +88,9 @@ public class SyncAgentState {
      * @param newAction
      */
     public synchronized void addAction(String newAction) {
-        this.actions.addItem(newAction);
+        if (newAction.length() > 0) {
+            this.actions.addItem(newAction);
+        }
     }
 
     /**
@@ -147,6 +151,27 @@ public class SyncAgentState {
     public synchronized String getOutboxMessage() {
         if (checkOutboxMailAvailable()) {
             return this.outbox.getNextItem().toString();
+        } else {
+            return null;
+        }
+    }
+
+
+    public synchronized boolean checkPerformanceMeasureAvailable() {
+        return this.performanceTracker.isItemAvailable();
+    }
+
+
+    public synchronized void addPerformanceMeasure(String measure) {
+        this.performanceTracker.addItem(measure);
+    }
+
+    /**
+     * Get the next action that the agent has requested
+     */
+    public synchronized String getPerformanceMeasure() {
+        if (checkPerformanceMeasureAvailable()) {
+            return this.performanceTracker.getNextItem().toString();
         } else {
             return null;
         }
