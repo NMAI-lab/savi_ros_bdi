@@ -46,7 +46,7 @@ public class SaviAgent extends AgArch implements Runnable {
     }
 
     /**
-     * Execute the BDI reaoning cycle.
+     * Execute the BDI reasoning cycle.
      */
     public void run() {
         System.out.println("I'm a Jason agent_core and I'm starting");
