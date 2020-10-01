@@ -255,7 +255,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
         // Set up the Jason agent
         try {
-            Agent ag = new Agent();
+            Agent ag = new SaviAgentBrain();
             new TransitionSystem(ag, null, null, this);
             this.name = agentName;
 
