@@ -52,6 +52,11 @@ $ cd ~/SAVI_ROS/rosjavaWorkspace
 $ catkin_make
 $ source devel/setup.bash
 ```
+## Pre Built Project Configuration
+Alternatively to building your own project configuration from scratch, which we have found to be somewhat tricky, we have included a prebuilt project directory that can be used for setting up your project worksapce. This configuration is available as a xip file here: https://drive.google.com/file/d/1e260VPV3J92DGzMtxe6uQ5jVbhCNl1YF/view?usp=sharing
+
+There are two empty directories in this configuration. One for savi_ros_demo and the other for savi_ros_bdi. Those directories are the intended location for the repositories.
+
 ## Running
 To run the savi_ros_bdi process perform the following proceedure.
 
