@@ -24,7 +24,7 @@ mainClassName = 'org.ros.RosRun'
 repositories {
   mavenCentral()
   //maven { url "http://jacamo.sourceforge.net/maven2" }
-  maven { url "https://jitpack.io" }
+  maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
 }
 
 /*
@@ -45,7 +45,9 @@ dependencies {
   /* An external maven artifact dependency */
   compile 'org.ros.rosjava_core:rosjava:[0.3,0.4)'
   //compile group: 'org.jason-lang', name: 'jason', version: '2.6-SNAPSHOT'
-  compile group: 'com.github.jason-lang', name: 'jason', version: 'v.2.6.2'
+  //compile group: 'com.github.jason-lang', name: 'jason', version: 'v2.6.2'
+  //implementation 'com.github.jason-lang:jason:v2.6.2'
+  implementation group: 'org.jason' , name: 'jason' , version: '2.6-SNAPSHOT', changing: true, transitive: false
 
 
   testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0-M1'
