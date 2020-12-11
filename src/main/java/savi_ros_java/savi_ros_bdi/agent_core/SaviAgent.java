@@ -209,6 +209,7 @@ public class SaviAgent extends AgArch implements Runnable {
         InputStream input = null;
         Properties agentProperties = new Properties();
         String configFileName = this.configFilePath;
+        System.out.println("Config file path: " + configFileName);
 
         try {
             input = new FileInputStream(configFileName);
