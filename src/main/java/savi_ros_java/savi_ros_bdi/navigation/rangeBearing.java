@@ -7,8 +7,6 @@ import jason.asSyntax.NumberTerm;
 import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 
-
-
 public class rangeBearing extends DefaultInternalAction {
 
 
@@ -24,7 +22,7 @@ public class rangeBearing extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         // execute the internal action
-        ts.getAg().getLogger().info("executing internal action 'navigation.range'");
+        ts.getAg().getLogger().info("executing internal action 'navigation.rangeBearing'");
         
 		try {
 			// Get the parameters
@@ -32,19 +30,19 @@ public class rangeBearing extends DefaultInternalAction {
 			NumberTerm lon1Term = (NumberTerm) args[lon1Index];
 			NumberTerm lat2Term = (NumberTerm) args[lat2Index];
 			NumberTerm lon2Term = (NumberTerm) args[lon2Index];
-			
+
 			// Lat and Lon as radians
 			double lat1 = Math.toRadians(lat1Term.solve());
 			double lon1 = Math.toRadians(lon1Term.solve());
 			double lat2 = Math.toRadians(lat2Term.solve());
 			double lon2 = Math.toRadians(lon2Term.solve());
-			
+
 			// https://en.wikipedia.org/wiki/Haversine_formula#:~:text=The%20haversine%20formula%20determines%20the,and%20angles%20of%20spherical%20triangles
 			// http://edwilliams.org/avform.htm
 			double radius_m = 6356752; // m
 			double distance_radians = 2 * Math.asin(Math.sqrt(Math.pow((Math.sin((lat1-lat2)/2)),2) + Math.cos(lat1)*Math.cos(lat2)*Math.pow((Math.sin((lon1-lon2)/2)),2)));
 			double d = radius_m * distance_radians;
-		
+
 			// We obtain the initial course, tc1, (at point 1) from point 1 to point 2 by the following. The formula fails if the initial point is a pole. We can special case this with:
 			double tc1 = 0;
 			double eps = 0.0001;
@@ -72,6 +70,7 @@ public class rangeBearing extends DefaultInternalAction {
 			return successRange && successBearing;
 		
 		} catch (Exception e) {
+			ts.getAg().getLogger().info(e.toString());
 			throw new Exception("Error in 'rangeBearing'.");
 		}
     }
