@@ -20,23 +20,11 @@ public class RangeBearingTest extends TestCase {
 
         System.out.println("Starting the RangeBearing testCase");
 
-        double range = rbTester.calculateRange(post1Lat,post1Lon,post2Lat,post2Lon);
-        double bearing = rbTester.calculateBearing(range, post1Lat,post1Lon,post2Lat,post2Lon);
+        double range = rbTester.calculateRange(post1Lat,post1Lon,post2Lat,post2Lon,"meters");
+        double bearing = rbTester.calculateBearing(post1Lat,post1Lon,post2Lat,post2Lon);
 
         System.out.println("Range: " + Double.toString(range));
         System.out.println("Bearing: " + Double.toString(bearing));
-//        assertTrue("Basic test", true);
-
-        //assertFalse("Checking that empty agentState has no perception available", agentState.isPerceptionAvailable());
-        //assertFalse("Checking that empty agentState has no inbox message available", agentState.checkInboxMailAvailable());
-        //agentState.addToInbox("<1582740868.91,2,tell,0,anotherTime(1582740868.91)>");
-        //assertTrue("Checking that agentState has inbox available after adding", agentState.checkInboxMailAvailable());
-
-
-        // Test case with batteryOK perception (no brackets scenario)
-        //agentState.setPerceptions("battery(ok)");
-        //assertTrue("Checking that agentState has perception available after adding", agentState.isPerceptionAvailable());
-
 
         System.out.println("Test complete");
     }
