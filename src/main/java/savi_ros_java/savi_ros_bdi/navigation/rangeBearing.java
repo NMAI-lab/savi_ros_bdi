@@ -32,11 +32,12 @@ public class rangeBearing extends DefaultInternalAction {
             NumberTerm lon2Term = (NumberTerm) args[lon2Index];
 
             // Lat and Lon as radians
-            double lat1 = Math.toRadians(lat1Term.solve());
-            double lon1 = Math.toRadians(lon1Term.solve());
-            double lat2 = Math.toRadians(lat2Term.solve());
-            double lon2 = Math.toRadians(lon2Term.solve());
+            double lat1 = lat1Term.solve();
+            double lon1 = lon1Term.solve();
+            double lat2 = lat2Term.solve();
+            double lon2 = lon2Term.solve();
 
+            // Calculate results
             double range = calculateRange(lat1, lon1, lat2, lon2, "meters");
             double bearing = calculateBearing(lat1, lon1, lat2, lon2);
 
@@ -74,7 +75,7 @@ public class rangeBearing extends DefaultInternalAction {
             } else if (unit.equals("meters")) {
                 dist = dist * 1.609344 * 1000.0;
             }
-            return (dist);
+            return dist;
         }
     }
 
@@ -89,7 +90,15 @@ public class rangeBearing extends DefaultInternalAction {
         double y = Math.sin(longDiff) * Math.cos(latitude2);
         double x = Math.cos(latitude1) * Math.sin(latitude2) - Math.sin(latitude1) * Math.cos(latitude2) * Math.cos(longDiff);
 
-        return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
+        double bearing = (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
+
+         while (bearing > 180) {
+             bearing = bearing - 360.0;
+         }
+         while (bearing < -180) {
+             bearing = bearing + 360;
+         }
+         return bearing;
     }
 
 }

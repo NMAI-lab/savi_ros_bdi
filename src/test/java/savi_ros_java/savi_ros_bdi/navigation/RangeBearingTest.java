@@ -7,8 +7,8 @@ public class RangeBearingTest extends TestCase {
 
     @Test
     public void testCase() {
-        double post1Lat = 47.641482370883864;
-        double post1Lon = -122.14036499180827;
+        double post1Lat = 47.6414824122;
+        double post1Lon = -122.140364987;
         double post2Lat = 47.6426242556;
         double post2Lon = -122.140354517;
         double post3Lat = 47.642632115856806;
