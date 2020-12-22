@@ -36,7 +36,7 @@ public class LiteralManager<Literal> extends ItemManager {
         // literalString. Add it to the queue
         int bracketSpot = literalString.indexOf(')');
         String nextLiteral = literalString.substring(0, bracketSpot + 1);
-        items.add(jason.asSyntax.Literal.parseLiteral(literalString));
+        items.add(jason.asSyntax.Literal.parseLiteral(nextLiteral));
 
         // Repeat for string segment that comes after 'nextPerception'
         String newLiteralString = literalString.substring(bracketSpot + 1);
