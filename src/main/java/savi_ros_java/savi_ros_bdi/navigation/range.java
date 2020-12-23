@@ -7,7 +7,7 @@ import jason.asSyntax.NumberTerm;
 import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 
-public class rangeBearing extends DefaultInternalAction {
+public class range extends DefaultInternalAction {
     private static final long serialVersionUID = 1L;
 
     public static final int lat1Index = 0;
@@ -15,14 +15,11 @@ public class rangeBearing extends DefaultInternalAction {
     public static final int lat2Index = 2;
     public static final int lon2Index = 3;
     public static final int rangeResultIndex = 4;
-    public static final int bearingResultIndex = 5;
-
-
 
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         // execute the internal action
-        ts.getAg().getLogger().info("executing internal action 'navigation.rangeBearing'");
+        ts.getAg().getLogger().info("executing internal action 'navigation.range'");
 
         try {
             // Get the parameters
@@ -38,27 +35,23 @@ public class rangeBearing extends DefaultInternalAction {
             double lon2 = lon2Term.solve();
 
             // Calculate results
-            double range = calculateRange(lat1, lon1, lat2, lon2, "meters");
-            double bearing = calculateBearing(lat1, lon1, lat2, lon2);
+            double rangeResult = range.calculateRange(lat1, lon1, lat2, lon2, "meters");
 
             // Create result terms
-            NumberTerm rangeTerm = new NumberTermImpl(range);
-            NumberTerm bearingTerm = new NumberTermImpl(bearing);
+            NumberTerm rangeTerm = new NumberTermImpl(rangeResult);
 
             // Unify and return
             boolean successRange = un.unifies(rangeTerm, args[rangeResultIndex]);
-            boolean successBearing = un.unifies(bearingTerm, args[bearingResultIndex]);
-            return successRange && successBearing;
+            return successRange;
 
         } catch (Exception e) {
             ts.getAg().getLogger().info(e.toString());
-            throw new Exception("Error in 'rangeBearing'.");
+            throw new Exception("Error in 'range'.");
         }
     }
 
-
     // https://www.geodatasource.com/developers/java
-    public double calculateRange(double lat1, double lon1, double lat2, double lon2, String unit) {
+    public static double calculateRange(double lat1, double lon1, double lat2, double lon2, String unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         } else {
@@ -78,27 +71,4 @@ public class rangeBearing extends DefaultInternalAction {
             return dist;
         }
     }
-
-    public double calculateBearing(double lat1, double lon1, double lat2, double lon2) {
-        // https://stackoverflow.com/questions/9457988/bearing-from-one-coordinate-to-another
-
-        double longitude1 = lon1;
-        double longitude2 = lon2;
-        double latitude1 = Math.toRadians(lat1);
-        double latitude2 = Math.toRadians(lat2);
-        double longDiff = Math.toRadians(longitude2 - longitude1);
-        double y = Math.sin(longDiff) * Math.cos(latitude2);
-        double x = Math.cos(latitude1) * Math.sin(latitude2) - Math.sin(latitude1) * Math.cos(latitude2) * Math.cos(longDiff);
-
-        double bearing = (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
-
-         while (bearing > 180) {
-             bearing = bearing - 360.0;
-         }
-         while (bearing < -180) {
-             bearing = bearing + 360;
-         }
-         return bearing;
-    }
-
 }
