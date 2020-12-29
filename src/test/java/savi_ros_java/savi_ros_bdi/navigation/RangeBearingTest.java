@@ -16,15 +16,15 @@ public class RangeBearingTest extends TestCase {
         double post4Lat = 47.642634517703016;
         double post4Lon = -122.14203898419318;
 
-        rangeBearing rbTester = new rangeBearing();
+        //rangeBearing rbTester = new rangeBearing();
 
         System.out.println("Starting the RangeBearing testCase");
 
-        double range = rbTester.calculateRange(post1Lat,post1Lon,post2Lat,post2Lon,"meters");
-        double bearing = rbTester.calculateBearing(post1Lat,post1Lon,post2Lat,post2Lon);
+        double rangeValue = range.calculateRange(post2Lat,post2Lon,post4Lat,post4Lon,"meters");
+        double bearingValue = bearing.calculateBearing(post2Lat,post2Lon,post4Lat,post4Lon);
 
-        System.out.println("Range: " + Double.toString(range));
-        System.out.println("Bearing: " + Double.toString(bearing));
+        System.out.println("Range: " + Double.toString(rangeValue));
+        System.out.println("Bearing: " + Double.toString(bearingValue));
 
         System.out.println("Test complete");
     }
