@@ -1,4 +1,4 @@
-package savi_ros_java.savi_ros_bdi.navigation.AStar;
+package savi_ros_java.savi_ros_bdi.navigation.a_star;
 
 import aima.core.search.framework.SearchForActions;
 import aima.core.search.framework.problem.GeneralProblem;
