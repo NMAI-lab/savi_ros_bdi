@@ -1,6 +1,6 @@
 // Internal action code for project search.mas2j
 
-package navigationInternalAction;
+package savi_ros_java.savi_ros_bdi.navigation;
 
 import NavigationSupport.*;
 

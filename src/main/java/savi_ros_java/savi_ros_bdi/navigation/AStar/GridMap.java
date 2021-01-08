@@ -1,4 +1,4 @@
-package NavigationSupport;
+package savi_ros_java.savi_ros_bdi.navigation.AStar;
 
 import java.io.File;
 import java.io.FileNotFoundException;

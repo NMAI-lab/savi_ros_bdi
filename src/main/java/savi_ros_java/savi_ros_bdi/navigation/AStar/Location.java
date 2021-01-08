@@ -1,4 +1,4 @@
-package NavigationSupport;
+package savi_ros_java.savi_ros_bdi.navigation.AStar;
 
 public class Location {
     private double x;
