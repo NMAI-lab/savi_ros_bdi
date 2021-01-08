@@ -21,6 +21,7 @@ public class MapSearchFunctions {
 	
     public static String getNavigationPath(String start, String finish) {
         String path = "D:\\Local Documents\\ROS_Workspaces\\RoombaWorkspaces\\src\\jason_mobile_agent_ros\\asl\\map.asl";
+        //String path = "D:\\Local Documents\\ROS_Workspaces\\AirSimNavigatingCar\\asl\\map.asl";
         Problem<NavigationState, MapAction> problem = MapSearchFunctions.createProblem(start,finish,path);
         SearchForActions<NavigationState, MapAction> aStarSearch = new AStarSearch<>(new GraphSearch<>(), new HeuristicCalculator());
         Optional<List<MapAction>> actions = aStarSearch.findActions(problem);
