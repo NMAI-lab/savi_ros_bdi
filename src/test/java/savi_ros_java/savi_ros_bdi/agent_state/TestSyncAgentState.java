@@ -1,11 +1,9 @@
-package savi_ros_java.savi_ros.bdi.agent_state;
+package savi_ros_java.savi_ros_bdi.agent_state;
 
 import jason.asSemantics.Message;
 import jason.asSyntax.Literal;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
-import savi_ros_java.savi_ros_bdi.agent_state.LiteralManager;
-import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.util.List;
 

@@ -98,7 +98,17 @@ public class SyncAgentState {
      */
     public synchronized String getAction() {
         if (isActionAvailable()) {
-            return this.actions.getNextItem().toString();
+            String actionString = this.actions.getNextItem().toString();
+            // Remove any spaces
+            actionString = actionString.replace(" ", "");
+
+            // Deal with double brackets around negative numbers
+            actionString = actionString.replace("((", "(");
+            actionString = actionString.replace("))", ")");
+            actionString = actionString.replace("),(", ",");
+            actionString = actionString.replace(",(", ",");
+            actionString = actionString.replace("),", ",");
+            return actionString;
         } else {
             return null;
         }
