@@ -28,8 +28,6 @@ targetCompatibility = 1.8
 repositories {
   mavenCentral()
   maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
-  //maven { url "https://github.com/aimacode/aima-java/tree/AIMA3e" }
-  //flatDir { dirs 'lib'}
 }
 
 /*
@@ -49,12 +47,9 @@ repositories {
 dependencies {
   /* An external maven artifact dependency */
   compile 'org.ros.rosjava_core:rosjava:[0.3,0.4)'
-  compile fileTree(include: ['*.jar'], dir: System.getProperty( 'user.dir' )+'/lib')
-  //compile fileTree(include: ['*.jar'], dir: 'D:/Local Documents/ROS_Workspaces/SAVI_ROS/rosjavaWorkspace/src/savi_ros_java/lib')
+  compile fileTree(include: ['*.jar'], dir: 'lib')
 
   implementation group: 'org.jason' , name: 'jason' , version: '2.6-SNAPSHOT', changing: true, transitive: false
-  //implementation group: 'com.googlecode.aima-java', name: 'aima-core', version:'3.0.0'
-  //implementation files('lib/aima-core.jar')
 
   testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0-M1'
   testRuntime("org.junit.vintage:junit-vintage-engine:5.2.0")
@@ -73,5 +68,3 @@ test {
 }
 
 installDist.finalizedBy(cleanScripts)
-
-println "User Dir: ${System.getProperty( 'user.dir' )}"
