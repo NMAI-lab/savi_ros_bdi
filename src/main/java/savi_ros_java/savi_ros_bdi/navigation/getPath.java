@@ -2,11 +2,13 @@
 
 package savi_ros_java.savi_ros_bdi.navigation;
 
-import NavigationSupport.*;
-
-import jason.*;
-import jason.asSemantics.*;
+import jason.JasonException;
+import jason.asSemantics.DefaultInternalAction;
+import jason.asSemantics.TransitionSystem;
+import jason.asSemantics.Unifier;
 import jason.asSyntax.*;
+
+import savi_ros_java.savi_ros_bdi.navigation.a_star.MapSearchFunctions;
 
 public class getPath extends DefaultInternalAction {
 
