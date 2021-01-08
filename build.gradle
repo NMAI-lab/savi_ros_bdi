@@ -28,6 +28,7 @@ targetCompatibility = 1.8
 repositories {
   mavenCentral()
   maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
+  maven { url "https://github.com/aimacode/aima-java/tree/AIMA3e" }
 }
 
 /*
