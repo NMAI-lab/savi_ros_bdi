@@ -3,11 +3,11 @@ package savi_ros_java.savi_ros_bdi.navigation.a_star;
 import java.util.List;
 
 public class NavigationState {
-    private GridMap environment;
+    private EnvironmentMap environment;
     private String currentLocation;
     private String destinationLocation;
 
-    public NavigationState(GridMap environment, String current, String destination) {
+    public NavigationState(EnvironmentMap environment, String current, String destination) {
         this.environment = environment;
         setCurrentLocation(current);
         setDestinationLocation(destination);

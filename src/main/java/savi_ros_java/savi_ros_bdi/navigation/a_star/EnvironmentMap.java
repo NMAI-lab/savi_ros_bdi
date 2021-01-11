@@ -7,20 +7,20 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
 
-public class GridMap {
+public class EnvironmentMap {
 
     private Hashtable<String, List<String>> locationGraph;
-    private Hashtable<String, Location> locations;
+    private Hashtable<String, GridLocation> locations;
 
     public Hashtable<String, List<String>> getLocationGraph() {
         return (Hashtable<String, List<String>>)this.locationGraph.clone();
     }
 
-    public Hashtable<String, Location> getLocations() {
-        return (Hashtable<String, Location>)this.locations.clone();
+    public Hashtable<String, GridLocation> getLocations() {
+        return (Hashtable<String, GridLocation>)this.locations.clone();
     }
 
-    public GridMap(String path) {
+    public EnvironmentMap(String path) {
         this.locationGraph = new Hashtable<>();
         this.locations = new Hashtable<>();
         this.loadMapFile(path);
@@ -102,7 +102,7 @@ public class GridMap {
         }
 
         // Add the location to the location hashmap
-        Location currentLocation = new Location(x,y);
+        GridLocation currentLocation = new GridLocation(x,y);
         this.locations.put(name,currentLocation);
     }
 
@@ -149,8 +149,8 @@ public class GridMap {
     }
 
     public double getCost(String current, String next) {
-        Location nextLocation = this.locations.get(next);
-        Location currentLocation = this.locations.get(current);
+        GridLocation nextLocation = this.locations.get(next);
+        GridLocation currentLocation = this.locations.get(current);
         return currentLocation.range(nextLocation);
     }
 

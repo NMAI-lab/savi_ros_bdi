@@ -30,7 +30,7 @@ public class MapSearchFunctions {
     }
 
     public static Problem<NavigationState, MapAction> createProblem(String start, String finish, String path) {
-        GridMap myMap = new GridMap(path);
+        EnvironmentMap myMap = new EnvironmentMap(path);
         NavigationState startState = new NavigationState(myMap,start,finish);
         return new GeneralProblem(startState, MapSearchFunctions::getPossibleActions, MapSearchFunctions::getResultState,
                 MapSearchFunctions::testGoal, MapSearchFunctions::getActionCost);
