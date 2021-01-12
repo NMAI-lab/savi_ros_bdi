@@ -78,7 +78,7 @@ public class EnvironmentMap {
 
         // Characters between the first '(' and the first ',' is the location name
         start = line.indexOf('(') + 1;
-        end = line.indexOf(',') - 1;
+        end = line.indexOf(',');
         if (start == end) {
             name = Character.toString(line.charAt(start));
         } else {
@@ -87,7 +87,7 @@ public class EnvironmentMap {
 
         // Characters after '[' and before last ',' is the x location
         start = line.indexOf('[') + 1;
-        end = line.lastIndexOf(',') - 1;
+        end = line.lastIndexOf(',');
         if (start == end) {
             x = Double.parseDouble(Character.toString(line.charAt(start)));
         } else {
@@ -96,7 +96,7 @@ public class EnvironmentMap {
 
         // Characters after last ',' and before ']' is the y location
         start = line.lastIndexOf(",") + 1;
-        end = line.indexOf(']') - 1;
+        end = line.indexOf(']');
         if (start == end) {
             y = Double.parseDouble(Character.toString(line.charAt(start)));
         } else {
@@ -122,7 +122,7 @@ public class EnvironmentMap {
 
         // Characters between the first '(' and the first ',' is the first location name
         start = line.indexOf('(') + 1;
-        end = line.indexOf(',') - 1;
+        end = line.indexOf(',');
         if (start == end) {
             a = Character.toString(line.charAt(start));
         } else {
@@ -131,7 +131,7 @@ public class EnvironmentMap {
 
         // Characters between the first ',' and the first ')' is the second location name
         start = line.indexOf(',') + 1;
-        end = line.indexOf(')') - 1;
+        end = line.indexOf(')');
         if (start == end) {
             b = Character.toString(line.charAt(start));
         } else {
