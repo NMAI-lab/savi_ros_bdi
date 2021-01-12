@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class EnvironmentMap {
 
     private Hashtable<String, List<String>> locationGraph;
-    private Hashtable<String, GridLocation> locations;
+    private Hashtable<String, Location> locations;
 
     public Hashtable<String, List<String>> getLocationGraph() {
         return (Hashtable<String, List<String>>)this.locationGraph.clone();
@@ -20,13 +20,13 @@ public class EnvironmentMap {
         return (Hashtable<String, GridLocation>)this.locations.clone();
     }
 
-    public EnvironmentMap(String path) {
+    public EnvironmentMap(String path, boolean latLon) {
         this.locationGraph = new Hashtable<>();
         this.locations = new Hashtable<>();
-        this.loadMapFile(path);
+        this.loadMapFile(path, latLon);
     }
 
-    private void loadMapFile(String path){
+    private void loadMapFile(String path, boolean latLon){
         try {
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
@@ -34,7 +34,7 @@ public class EnvironmentMap {
                 String data = myReader.nextLine();
                 if (!this.isSkipLine(data)) {
                     if (data.contains("locationName")) {
-                        this.parseLocation(data);
+                        this.parseLocation(data, latLon);
                     } else if (data.contains("possible")) {
                         this.parsePossible(data);
                     }
@@ -66,11 +66,13 @@ public class EnvironmentMap {
         }
     }
 
-    private void parseLocation(String line) {
+    private void parseLocation(String line, boolean latLon) {
         // Example location name string: locationName(b,[1,3]).
         int start;
         int end;
         String name;
+
+        // For lat lon locations, x is latitude, y is longitude
         double x;
         double y;
 
@@ -102,7 +104,12 @@ public class EnvironmentMap {
         }
 
         // Add the location to the location hashmap
-        GridLocation currentLocation = new GridLocation(x,y);
+        Location currentLocation;
+        if (latLon) {
+            currentLocation = new EarthLocation(x, y);
+        } else {
+            currentLocation = new GridLocation(x, y);
+        }
         this.locations.put(name,currentLocation);
     }
 
@@ -149,8 +156,8 @@ public class EnvironmentMap {
     }
 
     public double getCost(String current, String next) {
-        GridLocation nextLocation = this.locations.get(next);
-        GridLocation currentLocation = this.locations.get(current);
+        Location nextLocation = this.locations.get(next);
+        Location currentLocation = this.locations.get(current);
         return currentLocation.range(nextLocation);
     }
 

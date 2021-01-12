@@ -20,17 +20,19 @@ public class MapSearchFunctions {
     }
 	
     public static String getNavigationPath(String start, String finish) {
-        String path = "D:\\Local Documents\\ROS_Workspaces\\RoombaWorkspaces\\src\\jason_mobile_agent_ros\\asl\\map.asl";
-        //String path = "D:\\Local Documents\\ROS_Workspaces\\AirSimNavigatingCar\\asl\\map.asl";
-        Problem<NavigationState, MapAction> problem = MapSearchFunctions.createProblem(start,finish,path);
+        //String path = "D:\\Local Documents\\ROS_Workspaces\\RoombaWorkspaces\\src\\jason_mobile_agent_ros\\asl\\map.asl";
+        //boolean latLon = false;
+        String path = "D:\\Local Documents\\ROS_Workspaces\\AirSimNavigatingCar\\asl\\map.asl";
+        boolean latLon = true;
+        Problem<NavigationState, MapAction> problem = MapSearchFunctions.createProblem(start,finish,path, latLon);
         SearchForActions<NavigationState, MapAction> aStarSearch = new AStarSearch<>(new GraphSearch<>(), new HeuristicCalculator());
         Optional<List<MapAction>> actions = aStarSearch.findActions(problem);
         String actionString = generateActionString(actions);
         return actionString;
     }
 
-    public static Problem<NavigationState, MapAction> createProblem(String start, String finish, String path) {
-        EnvironmentMap myMap = new EnvironmentMap(path);
+    public static Problem<NavigationState, MapAction> createProblem(String start, String finish, String path, boolean latLon) {
+        EnvironmentMap myMap = new EnvironmentMap(path, latLon);
         NavigationState startState = new NavigationState(myMap,start,finish);
         return new GeneralProblem(startState, MapSearchFunctions::getPossibleActions, MapSearchFunctions::getResultState,
                 MapSearchFunctions::testGoal, MapSearchFunctions::getActionCost);
