@@ -62,9 +62,9 @@ public class SaviAgent extends AgArch implements Runnable {
                 Long elapsed = new Long(System.currentTimeMillis() - reasoningStartTime);
                 this.agentState.addPerformanceMeasure(elapsed.toString());
 
-                if (getTS().canSleep()) {
-                    sleep();
-                }
+                //if (getTS().canSleep()) {
+                //    sleep();
+                //}
             }
             System.out.println("agent_core stopped.");
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class SaviAgent extends AgArch implements Runnable {
         //logger.log(Level.FINE, "Snoozing");
         //System.out.println("Snoozing");
         try {
-            Thread.sleep(100);                    // TODO: Need to revisit this
+            Thread.sleep(1);                    // TODO: Need to revisit this
         } catch (InterruptedException e) {
         }
     }
