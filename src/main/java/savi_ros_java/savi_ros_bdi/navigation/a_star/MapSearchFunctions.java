@@ -10,6 +10,20 @@ import java.util.*;
 
 public class MapSearchFunctions {
 
+    private static EnvironmentMap myMap;
+
+    public static EnvironmentMap getMapInstance() {
+        //String path = "D:\\Local Documents\\ROS_Workspaces\\RoombaWorkspaces\\src\\jason_mobile_agent_ros\\asl\\map.asl";
+        //boolean latLon = false;
+        String path = "D:\\Local Documents\\ROS_Workspaces\\AirSimNavigatingCar\\asl\\map.asl";
+        boolean latLon = true;
+
+        if (myMap == null) {
+            myMap = EnvironmentMap.getInstance(path,latLon);
+        }
+        return myMap;
+    }
+
     public static String getNavigationPath(String action) {
         int bracketOpen = action.indexOf("(");
         int bracketClose = action.indexOf(")");
@@ -20,19 +34,15 @@ public class MapSearchFunctions {
     }
 	
     public static String getNavigationPath(String start, String finish) {
-        //String path = "D:\\Local Documents\\ROS_Workspaces\\RoombaWorkspaces\\src\\jason_mobile_agent_ros\\asl\\map.asl";
-        //boolean latLon = false;
-        String path = "D:\\Local Documents\\ROS_Workspaces\\AirSimNavigatingCar\\asl\\map.asl";
-        boolean latLon = true;
-        Problem<NavigationState, MapAction> problem = MapSearchFunctions.createProblem(start,finish,path, latLon);
+        Problem<NavigationState, MapAction> problem = MapSearchFunctions.createProblem(start,finish);
         SearchForActions<NavigationState, MapAction> aStarSearch = new AStarSearch<>(new GraphSearch<>(), new HeuristicCalculator());
         Optional<List<MapAction>> actions = aStarSearch.findActions(problem);
         String actionString = generateActionString(actions);
         return actionString;
     }
 
-    public static Problem<NavigationState, MapAction> createProblem(String start, String finish, String path, boolean latLon) {
-        EnvironmentMap myMap = new EnvironmentMap(path, latLon);
+    public static Problem<NavigationState, MapAction> createProblem(String start, String finish) {
+        getMapInstance();
         NavigationState startState = new NavigationState(myMap,start,finish);
         return new GeneralProblem(startState, MapSearchFunctions::getPossibleActions, MapSearchFunctions::getResultState,
                 MapSearchFunctions::testGoal, MapSearchFunctions::getActionCost);
