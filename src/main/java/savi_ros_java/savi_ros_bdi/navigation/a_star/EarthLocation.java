@@ -7,7 +7,6 @@ public class EarthLocation implements Location {
     private double latitude;
     private double longitude;
 
-
     public EarthLocation(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;

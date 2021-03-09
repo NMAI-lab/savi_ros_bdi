@@ -11,16 +11,16 @@ public class EnvironmentMap {
 
     private Hashtable<String, List<String>> locationGraph;
     private Hashtable<String, Location> locations;
+    private static EnvironmentMap instance;
 
-    public Hashtable<String, List<String>> getLocationGraph() {
-        return (Hashtable<String, List<String>>)this.locationGraph.clone();
+    public static EnvironmentMap getInstance(String path, boolean latLon) {
+        if (instance == null) {
+            instance = new EnvironmentMap(path, latLon);
+        }
+        return instance;
     }
 
-    public Hashtable<String, GridLocation> getLocations() {
-        return (Hashtable<String, GridLocation>)this.locations.clone();
-    }
-
-    public EnvironmentMap(String path, boolean latLon) {
+    private EnvironmentMap(String path, boolean latLon) {
         this.locationGraph = new Hashtable<>();
         this.locations = new Hashtable<>();
         this.loadMapFile(path, latLon);
@@ -163,5 +163,16 @@ public class EnvironmentMap {
 
     public double getHeuristic(String current, String goal) {
         return this.getCost(current,goal);
+    }
+
+    /**
+     * Set an obstacle. Removes 'blocked' from list of places that are
+     * accessible from 'current'
+     */
+    public void setObstacle(String current, String blocked) {
+        List<String> possible = getPossibleDestinations(current);
+
+        // Need to remove it from the list. It's a shallow copy, so just go with it.
+        possible.remove(blocked);
     }
 }
