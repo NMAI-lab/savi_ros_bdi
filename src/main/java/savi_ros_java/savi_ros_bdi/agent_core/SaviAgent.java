@@ -4,6 +4,7 @@ import jason.architecture.AgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
+import org.w3c.dom.Document;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
@@ -68,9 +70,15 @@ public class SaviAgent extends AgArch implements Runnable {
 
             while (isRunning()) {
                 // calls the Jason engine to perform one reasoning cycle
+
+                // This should be a logger print
                 System.out.println("agent_core is reasoning....");
                 long reasoningStartTime = System.currentTimeMillis();
+
+                // Put mind inspector log here (or before the performance log)
                 getTS().reasoningCycle();
+                // Put mind inspector log here (or after the performance log)
+
                 Long elapsed = new Long(System.currentTimeMillis() - reasoningStartTime);
                 this.agentState.addPerformanceMeasure(elapsed.toString());
 
@@ -267,5 +275,19 @@ public class SaviAgent extends AgArch implements Runnable {
             System.out.println("Init error loading asl file: " + e.toString());
             System.out.println("ASL Path was: " + aslPath);
         }
+    }
+
+    /**
+     * Adding logging of the agent mind state
+     * -- Needs improvement - adjust the logging levels
+     * -- Verify that the content is what we are looking for
+     * -- Figure out when to call this - Looks like it should be at start of reasoning cycle and at end of reasoning cycle
+     * -- https://github.com/jason-lang/jason/blob/master/src/main/java/jason/architecture/MindInspectorAgArch.java#L320
+     */
+    public void getAgentMind() {
+        Document state = this.getTS().getAg().getAgState();
+        String mindString = state.toString();
+        Logger logger = this.getTS().getLogger();
+        logger.info(mindString);
     }
 }
