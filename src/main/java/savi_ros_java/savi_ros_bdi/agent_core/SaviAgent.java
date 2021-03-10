@@ -1,10 +1,9 @@
 package savi_ros_java.savi_ros_bdi.agent_core;
 
-import jason.architecture.AgArch;
+import jason.architecture.MindInspectorAgArch;
 import jason.asSemantics.*;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
-import org.w3c.dom.Document;
 import savi_ros_java.savi_ros_bdi.agent_state.SyncAgentState;
 
 import java.io.FileInputStream;
@@ -14,7 +13,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 /**
  * The agent class. This is responsible for the agent reasoning cycle with the Jason bDI engine.
@@ -25,7 +23,8 @@ import java.util.logging.Logger;
  * @author Patrick Gavigan
  * @date 6 December 2019
  */
-public class SaviAgent extends AgArch implements Runnable {
+//public class SaviAgent extends AgArch implements Runnable {
+public class SaviAgent extends MindInspectorAgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
     private String configFilePath;
@@ -57,6 +56,9 @@ public class SaviAgent extends AgArch implements Runnable {
 
         // Get the agent state
         agentState = SyncAgentState.getSyncAgentState();
+
+        // Setup the mind inspector
+        super.setupMindInspector("file(cycle,html)");
     }
 
     /**
@@ -74,11 +76,7 @@ public class SaviAgent extends AgArch implements Runnable {
                 // This should be a logger print
                 System.out.println("agent_core is reasoning....");
                 long reasoningStartTime = System.currentTimeMillis();
-
-                // Put mind inspector log here (or before the performance log)
                 getTS().reasoningCycle();
-                // Put mind inspector log here (or after the performance log)
-
                 Long elapsed = new Long(System.currentTimeMillis() - reasoningStartTime);
                 this.agentState.addPerformanceMeasure(elapsed.toString());
 
@@ -91,6 +89,17 @@ public class SaviAgent extends AgArch implements Runnable {
             System.out.println("Run error " + e.toString());
         }
     }
+
+
+    /**
+     * A call-back method called by TS
+     * when a new reasoning cycle is starting
+     */
+    //public void reasoningCycleStarting() {
+    //    this.inspector.reasoningCycleStarting();
+    //    super.reasoningCycleStarting();
+    //}
+
 
     /**
      * Get the agent's name
@@ -284,10 +293,10 @@ public class SaviAgent extends AgArch implements Runnable {
      * -- Figure out when to call this - Looks like it should be at start of reasoning cycle and at end of reasoning cycle
      * -- https://github.com/jason-lang/jason/blob/master/src/main/java/jason/architecture/MindInspectorAgArch.java#L320
      */
-    public void getAgentMind() {
-        Document state = this.getTS().getAg().getAgState();
-        String mindString = state.toString();
-        Logger logger = this.getTS().getLogger();
-        logger.info(mindString);
-    }
+    //public void getAgentMind() {
+    //    Document state = this.getTS().getAg().getAgState();
+    //    String mindString = state.toString();
+    //    Logger logger = this.getTS().getLogger();
+    //    logger.info(mindString);
+    //}
 }
