@@ -58,7 +58,13 @@ public class SaviAgent extends MindInspectorAgArch implements Runnable {
         agentState = SyncAgentState.getSyncAgentState();
 
         // Setup the mind inspector
-        super.setupMindInspector("file(cycle,html)");
+        // super.setupMindInspector("file(cycle,html)");
+        this.init();
+    }
+
+    public void init() {// throws Exception {
+        super.init();
+        super.setupMindInspector("file(cycle,xml)");
     }
 
     /**
