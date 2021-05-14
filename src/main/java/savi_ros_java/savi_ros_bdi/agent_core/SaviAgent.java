@@ -26,14 +26,26 @@ import java.util.Properties;
 public class SaviAgent extends AgArch implements Runnable {
     private static final String broadcastID = "BROADCAST";
 
-    private final String configFilePath = "../../../resources/main/settings.cfg";
-
+    private String configFilePath;
     private String name;
     private SyncAgentState agentState;
     private boolean running;
 
     //public SaviAgent(String id, String type) {
     public SaviAgent() {
+        this("../../../resources/main/settings.cfg");
+        // Load parameters from configuration file
+        //Properties agentProperties = this.loadProperties();
+
+        // Load the agent
+        //this.loadAgent(agentProperties);
+
+        // Get the agent state
+        //agentState = SyncAgentState.getSyncAgentState();
+    }
+
+    public SaviAgent(String configPath) {
+        this.configFilePath = new String(configPath);
 
         // Load parameters from configuration file
         Properties agentProperties = this.loadProperties();
@@ -243,7 +255,7 @@ public class SaviAgent extends AgArch implements Runnable {
 
         // Set up the Jason agent
         try {
-            Agent ag = new Agent();
+            Agent ag = new SaviAgentBrain();
             new TransitionSystem(ag, null, null, this);
             this.name = agentName;
 
