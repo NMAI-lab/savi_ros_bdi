@@ -18,7 +18,7 @@ public class SaviAgentBrain extends Agent {
 
     protected List<String> eventPriorities;
 
-    SaviAgentBrain() {
+    public SaviAgentBrain() {
         super();
         this.setEventPriorities();
     }
